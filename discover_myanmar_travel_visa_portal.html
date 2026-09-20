@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Myanmar | All-in-One Travel & Visa Portal</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        myanmar: {
+                            gold: '#D4AF37',
+                            goldHover: '#B89628',
+                            teal: '#0D5C75',
+                            tealDark: '#083B4C',
+                            ruby: '#9B111E',
+                            sunset: '#E76F51'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #0D5C75; border-radius: 4px; }
+        .hero-bg {
+            background-linear-gradient: overlay;
+            background-image: linear-gradient(to bottom, rgba(13, 92, 117, 0.75), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1512553353614-82a7370096dc?w=1600&auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-300">
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col gap-3 max-w-sm pointer-events-none"></div>
+
+    <header class="sticky top-0 z-40 w-full glass border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-myanmar-gold to-myanmar-sunset flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid fa-pagoda text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-myanmar-teal via-myanmar-gold to-myanmar-sunset dark:from-sky-400 dark:to-myanmar-gold">
+                            Discover Myanmar
+                        </span>
+                        <span class="block text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-widest -mt-1">Travel & Visa Portal</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Bar -->
+                <nav class="hidden lg:flex items-center space-x-1">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-myanmar-teal dark:text-myanmar-gold bg-myanmar-teal/10 dark:bg-slate-800 transition">
+                        <i class="fa-solid fa-compass mr-1.5"></i>Explore
+                    </button>
+                    <button onclick="switchTab('visas')" id="nav-visas" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-myanmar-teal dark:hover:text-myanmar-gold hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-passport mr-1.5"></i>Visa Hub
+                    </button>
+                    <button onclick="switchTab('transport')" id="nav-transport" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-myanmar-teal dark:hover:text-myanmar-gold hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-plane-departure mr-1.5"></i>Transport
+                    </button>
+                    <button onclick="switchTab('hotels')" id="nav-hotels" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-myanmar-teal dark:hover:text-myanmar-gold hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-hotel mr-1.5"></i>Hotels
+                    </button>
+                    <button onclick="switchTab('sim')" id="nav-sim" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-myanmar-teal dark:hover:text-myanmar-gold hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-sim-card mr-1.5"></i>SIM Cards
+                    </button>
+                    <button onclick="switchTab('planner')" id="nav-planner" class="nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-myanmar-teal dark:hover:text-myanmar-gold hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                        <i class="fa-solid fa-calculator mr-1.5"></i>Trip Tools
+                    </button>
+                </nav>
+
+                <!-- Actions / Controls -->
+                <div class="flex items-center space-x-3">
+                    <button id="theme-toggle" class="p-2.5 text-slate-600 dark:text-slate-300 hover:text-myanmar-gold dark:hover:text-myanmar-gold rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition" title="Toggle Theme">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <button onclick="switchTab('visas')" class="hidden sm:flex px-4 py-2 bg-gradient-to-r from-myanmar-teal to-myanmar-tealDark hover:from-myanmar-tealDark hover:to-slate-900 text-white text-xs font-bold rounded-xl shadow-md transition items-center gap-2">
+                        <i class="fa-solid fa-file-signature"></i> Visa Application
+                    </button>
+                    <button id="mobile-menu-btn" class="lg:hidden p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-2 pb-4 space-y-1">
+            <button onclick="switchTab('home')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-compass w-6 text-myanmar-teal"></i>Explore Myanmar</button>
+            <button onclick="switchTab('visas')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-passport w-6 text-myanmar-teal"></i>Visa Guidelines</button>
+            <button onclick="switchTab('transport')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-plane-departure w-6 text-myanmar-teal"></i>Flights, Buses & Trains</button>
+            <button onclick="switchTab('hotels')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-hotel w-6 text-myanmar-teal"></i>Hotels & Resorts</button>
+            <button onclick="switchTab('sim')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-sim-card w-6 text-myanmar-teal"></i>SIM Card & Internet</button>
+            <button onclick="switchTab('planner')" class="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-calculator w-6 text-myanmar-teal"></i>Budget & Tools</button>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- VIEW 1: HOME & DESTINATIONS -->
+        <section id="view-home" class="view-section space-y-10">
+            <!-- Hero Banner -->
+            <div class="hero-bg rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden flex flex-col justify-between min-h-[380px]">
+                <div class="max-w-2xl z-10 space-y-4">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-myanmar-gold/30 backdrop-blur-md text-myanmar-gold border border-myanmar-gold/40">
+                        <i class="fa-solid fa-star"></i> Golden Land Travel Companion
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Discover The Wonders of <span class="text-myanmar-gold">Myanmar</span>
+                    </h1>
+                    <p class="text-slate-200 text-sm sm:text-base font-light">
+                        Your complete guide to ancient pagodas, pristine beaches, transport bookings, SIM cards, and visa regulations for foreign tourists and Myanmar travelers.
+                    </p>
+                </div>
+
+                <!-- Quick Jump Navigation Bar -->
+                <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 z-10">
+                    <button onclick="switchTab('visas')" class="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 text-left transition group">
+                        <i class="fa-solid fa-passport text-myanmar-gold text-lg mb-1 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-xs">Visa Guides</h4>
+                        <p class="text-[10px] text-slate-300">E-Visas & Embassy</p>
+                    </button>
+                    <button onclick="switchTab('transport')" class="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 text-left transition group">
+                        <i class="fa-solid fa-bus text-sky-400 text-lg mb-1 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-xs">Buses & Flights</h4>
+                        <p class="text-[10px] text-slate-300">Book routes</p>
+                    </button>
+                    <button onclick="switchTab('sim')" class="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 text-left transition group">
+                        <i class="fa-solid fa-wifi text-emerald-400 text-lg mb-1 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-xs">Airport SIM</h4>
+                        <p class="text-[10px] text-slate-300">ATOM, Mytel, MPT</p>
+                    </button>
+                    <button onclick="switchTab('hotels')" class="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 text-left transition group">
+                        <i class="fa-solid fa-bed text-amber-400 text-lg mb-1 group-hover:scale-110 transition-transform"></i>
+                        <h4 class="font-bold text-xs">Hotels</h4>
+                        <p class="text-[10px] text-slate-300">Top stays</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Essential Travel Tips Summary -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-3">
+                    <div class="p-3 rounded-xl bg-myanmar-teal/10 text-myanmar-teal dark:text-sky-400 text-xl"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm">Currency & Cash</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Myanmar Kyat (MMK). Crisp, unblemished USD notes required for official exchanges.</p>
+                    </div>
+                </div>
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-3">
+                    <div class="p-3 rounded-xl bg-amber-500/10 text-amber-600 text-xl"><i class="fa-solid fa-sun"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm">Best Season</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">November to February (Cool & Dry). Ideal for Bagan hot air balloons and Inle Lake.</p>
+                    </div>
+                </div>
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-3">
+                    <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-600 text-xl"><i class="fa-solid fa-hands-praying"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm">Cultural Respect</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Remove shoes and socks at pagodas. Dress modestly covering shoulders and knees.</p>
+                    </div>
+                </div>
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm flex items-start space-x-3">
+                    <div class="p-3 rounded-xl bg-purple-500/10 text-purple-600 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div>
+                        <h4 class="font-bold text-sm">Safety & Transit</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Stick to major tourist corridors (Yangon, Bagan, Mandalay, Inle). Check travel advisories.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Destinations Section with Filter Bar -->
+            <div class="space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Top Destinations in Myanmar</h2>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Explore temples, lakes, ancient cities, and tropical coastlines.</p>
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterDestinations('all')" class="dest-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-myanmar-teal text-white">All</button>
+                        <button onclick="filterDestinations('culture')" class="dest-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Culture & History</button>
+                        <button onclick="filterDestinations('nature')" class="dest-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Nature & Lakes</button>
+                        <button onclick="filterDestinations('beach')" class="dest-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Beaches</button>
+                    </div>
+                </div>
+
+                <!-- Destination Grid -->
+                <div id="destination-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards dynamically populated via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: VISA HUB -->
+        <section id="view-visas" class="view-section hidden space-y-8">
+            <div class="border-b border-slate-200 dark:border-slate-800 pb-5">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Myanmar & Embassy Visa Portal</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Dual guidelines: For Tourists entering Myanmar AND Myanmar Citizens applying for Foreign Visas.</p>
+            </div>
+
+            <!-- Visa Path Selection Tabs -->
+            <div class="flex rounded-2xl bg-slate-200 dark:bg-slate-800 p-1.5 max-w-md mx-auto">
+                <button onclick="toggleVisaTab('foreign')" id="visa-tab-foreign" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl bg-white dark:bg-slate-900 shadow text-myanmar-teal dark:text-myanmar-gold transition">
+                    <i class="fa-solid fa-plane-arrival mr-1.5"></i>Foreigners -> Myanmar
+                </button>
+                <button onclick="toggleVisaTab('citizens')" id="visa-tab-citizens" class="flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 transition">
+                    <i class="fa-solid fa-passport mr-1.5"></i>Myanmar -> Overseas
+                </button>
+            </div>
+
+            <!-- SUB-TAB 1: FOREIGNERS ENTERING MYANMAR -->
+            <div id="visa-content-foreign" class="space-y-6">
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 bg-emerald-500/10 text-emerald-600 rounded-xl text-xl"><i class="fa-solid fa-globe"></i></div>
+                        <div>
+                            <h3 class="text-lg font-bold">Official E-Visa for Myanmar Entry</h3>
+                            <p class="text-xs text-slate-500">Tourist & Business E-Visa applications must be submitted via the Ministry of Immigration official portal.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase">Tourist eVisa Fee</h4>
+                            <p class="text-lg font-extrabold text-myanmar-teal dark:text-myanmar-gold">$50 USD</p>
+                            <span class="text-[11px] text-slate-500">28 Days Stay (Single Entry)</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase">Processing Time</h4>
+                            <p class="text-lg font-extrabold text-myanmar-teal dark:text-myanmar-gold">3 - 5 Working Days</p>
+                            <span class="text-[11px] text-slate-500">Express service available</span>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase">Validity</h4>
+                            <p class="text-lg font-extrabold text-myanmar-teal dark:text-myanmar-gold">90 Days</p>
+                            <span class="text-[11px] text-slate-500">Must enter within 90 days</span>
+                        </div>
+                    </div>
+
+                    <h4 class="font-bold text-sm pt-2">Key Requirements:</h4>
+                    <ul class="text-xs space-y-2 text-slate-600 dark:text-slate-300 list-disc list-inside">
+                        <li>Passport with at least 6 months validity remaining.</li>
+                        <li>Color digital passport photo (4.5cm x 3.5cm) taken within 3 months.</li>
+                        <li>Return flight ticket confirmation.</li>
+                        <li>Hotel booking reservation in Myanmar.</li>
+                        <li>Mandatory Myanma Insurance travel insurance coverage certificate.</li>
+                    </ul>
+
+                    <div class="pt-3">
+                        <a href="https://evisa.moip.gov.mm" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-myanmar-teal text-white rounded-xl text-xs font-bold hover:bg-myanmar-tealDark transition shadow">
+                            Official eVisa Portal <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-TAB 2: MYANMAR CITIZENS APPLYING ABROAD -->
+            <div id="visa-content-citizens" class="hidden space-y-6">
+                <div class="p-4 bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 rounded-2xl text-xs flex items-center gap-3">
+                    <i class="fa-solid fa-circle-exclamation text-lg"></i>
+                    <span><strong>Notice for Myanmar Passport Holders:</strong> Embassy appointments in Yangon fill up quickly. Book appointments 1 to 2 months prior to travel dates.</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Thailand Visa -->
+                    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-base flex items-center gap-2"><span class="text-xl">🇹🇭</span> Thailand Embassy (Yangon)</h3>
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300">VFS / Online Booking</span>
+                        </div>
+                        <p class="text-xs text-slate-500">Tourist Visa (TR) or E-Visa online appointment system required for submission at Manawhari Road Embassy.</p>
+                        <div class="text-xs space-y-1 text-slate-600 dark:text-slate-300">
+                            <p>• <strong>Documents:</strong> Passport (Original + Copy), 6-Month Bank Statement ($1,000+ balance), Flight & Hotel Confirmation, NRC Card.</p>
+                            <p>• <strong>Fee:</strong> ~$40 USD tourist visa fee.</p>
+                        </div>
+                    </div>
+
+                    <!-- Japan Visa -->
+                    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-base flex items-center gap-2"><span class="text-xl">🇯🇵</span> Japan Embassy (Yangon)</h3>
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300">Direct / JVAC</span>
+                        </div>
+                        <p class="text-xs text-slate-500">Short-term Tourist / Business Visa. Requires detailed daily travel schedule in Japan.</p>
+                        <div class="text-xs space-y-1 text-slate-600 dark:text-slate-300">
+                            <p>• <strong>Documents:</strong> Visa Form with QR code, Itinerary in Japan, Bank Book with recent transactions, Employment/Company registration letter.</p>
+                        </div>
+                    </div>
+
+                    <!-- Singapore Visa -->
+                    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-base flex items-center gap-2"><span class="text-xl">🇸🇬</span> Singapore Visa</h3>
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300">Authorized Agent / E-Visa</span>
+                        </div>
+                        <p class="text-xs text-slate-500">Submitted through authorized travel agencies in Yangon or via Singapore local sponsor (V39A form).</p>
+                        <div class="text-xs space-y-1 text-slate-600 dark:text-slate-300">
+                            <p>• <strong>Documents:</strong> Passport photo, Form 14A, Letter of Introduction (LOI) from Singapore Citizen/PR if applicable.</p>
+                        </div>
+                    </div>
+
+                    <!-- Schengen / Korea / USA -->
+                    <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-base flex items-center gap-2"><span class="text-xl">🇪🇺 🇰🇷 🇺🇸</span> Korea, Schengen & USA</h3>
+                            <span class="px-2.5 py-1 rounded-md text-[10px] font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">VFS / DS-160</span>
+                        </div>
+                        <p class="text-xs text-slate-500">US Embassy (Inya Road) requires DS-160 payment and interview. Schengen visas booked via VFS Global Yangon.</p>
+                        <div class="text-xs space-y-1 text-slate-600 dark:text-slate-300">
+                            <p>• <strong>Tip:</strong> Ensure ties to Myanmar (property, job, family) are clearly documented for interview success.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: TRANSPORTATION -->
+        <section id="view-transport" class="view-section hidden space-y-8">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Transit & Route Booking</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Flights, Express VIP Buses, Train Lines, and Grab Taxi advice in Myanmar.</p>
+            </div>
+
+            <!-- Transport Type Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Domestic Airlines -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-plane"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Domestic Air Travel</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">The fastest way between Yangon, Bagan (Nyaung-U), Mandalay, Heho (Inle Lake), and Ngapali (Thandwe).</p>
+                    <div class="text-xs space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex justify-between font-semibold"><span>MAI (Myanmar Airways Intl)</span><span class="text-emerald-500">Active</span></div>
+                        <div class="flex justify-between font-semibold"><span>Air KBZ / Mingalar Aviation</span><span class="text-emerald-500">Active</span></div>
+                        <div class="flex justify-between font-semibold"><span>Mann Yadanarpon Airlines</span><span class="text-emerald-500">Active</span></div>
+                    </div>
+                    <button onclick="showToast('Domestic flight prices start around $80-$130 USD one-way.', 'info')" class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition">Check Fare Guides</button>
+                </div>
+
+                <!-- Express VIP Buses -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-bus"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">Express VIP Highway Buses</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Overnight 2+1 Scania VIP buses with reclining seats, snacks, and personal TVs. Highly popular & budget-friendly.</p>
+                    <div class="text-xs space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex justify-between font-semibold"><span>JJ Express</span><span class="text-myanmar-gold">Top Rated</span></div>
+                        <div class="flex justify-between font-semibold"><span>Elite Express</span><span class="text-myanmar-gold">VIP 2+1</span></div>
+                        <div class="flex justify-between font-semibold"><span>Mandalar Minn</span><span class="text-myanmar-gold">Frequent</span></div>
+                    </div>
+                    <button onclick="showToast('Popular Route: Yangon to Bagan (~9 hrs, $18 - $25 USD)', 'info')" class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition">View Bus Schedules</button>
+                </div>
+
+                <!-- Local Ride Hailing & Trains -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-taxi"></i>
+                    </div>
+                    <h3 class="font-bold text-lg">City Taxis & Rides</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">Use <strong>Grab</strong> app in Yangon for upfront metered fares. Taxis in Mandalay and Bagan are mostly negotiated flat rates.</p>
+                    <div class="text-xs space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <div class="flex justify-between font-semibold"><span>Yangon Airport -> Downtown Taxi</span><span>~15,000 - 25,000 MMK</span></div>
+                        <div class="flex justify-between font-semibold"><span>Bagan E-Bike Rental</span><span>~10,000 MMK/day</span></div>
+                        <div class="flex justify-between font-semibold"><span>Inle Lake Longtail Boat</span><span>~25,000 MMK/day</span></div>
+                    </div>
+                    <button onclick="showToast('Grab App is active and reliable across Yangon City.', 'info')" class="w-full py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-xl hover:bg-slate-200 transition">City Transport Tips</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 4: HOTELS -->
+        <section id="view-hotels" class="view-section hidden space-y-8">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Accommodation & Hotel Guide</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Recommended boutique stays, heritage hotels, and luxury resorts across major hubs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Hotel Card 1 -->
+                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=80" alt="Yangon Luxury Hotel" class="w-full h-48 object-cover">
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-myanmar-gold/20 text-myanmar-gold">Yangon Heritage</span>
+                        <h3 class="font-bold text-base">The Strand & Pan Pacific</h3>
+                        <p class="text-xs text-slate-500">Colonial elegance and 5-star comfort near Sule Pagoda and Downtown Yangon.</p>
+                        <div class="flex justify-between items-center pt-2 text-xs font-bold text-myanmar-teal dark:text-myanmar-gold">
+                            <span>From $110 / night</span>
+                            <button onclick="showToast('Booking Tip: Reserve online via Agoda or Booking.com for USD rates.', 'info')" class="text-xs hover:underline">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel Card 2 -->
+                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&auto=format&fit=crop&q=80" alt="Bagan Resort" class="w-full h-48 object-cover">
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-600">Bagan Riverview</span>
+                        <h3 class="font-bold text-base">Aureum Palace & Hotel River Top</h3>
+                        <p class="text-xs text-slate-500">Stunning views overlooking ancient pagodas and the Ayeyarwady River sunset.</p>
+                        <div class="flex justify-between items-center pt-2 text-xs font-bold text-myanmar-teal dark:text-myanmar-gold">
+                            <span>From $65 / night</span>
+                            <button onclick="showToast('Old Bagan hotels offer direct access to temples.', 'info')" class="text-xs hover:underline">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hotel Card 3 -->
+                <div class="rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&auto=format&fit=crop&q=80" alt="Inle Lake Resort" class="w-full h-48 object-cover">
+                    <div class="p-5 space-y-2">
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-sky-500/20 text-sky-600">Inle Water Villas</span>
+                        <h3 class="font-bold text-base">Novotel Inle & Heritage Stays</h3>
+                        <p class="text-xs text-slate-500">Overwater bungalows built on stilts directly on Inle Lake with mountain backdrops.</p>
+                        <div class="flex justify-between items-center pt-2 text-xs font-bold text-myanmar-teal dark:text-myanmar-gold">
+                            <span>From $85 / night</span>
+                            <button onclick="showToast('Stay overwater for traditional leg-rower sunrise views.', 'info')" class="text-xs hover:underline">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 5: SIM CARD & CONNECTIVITY -->
+        <section id="view-sim" class="view-section hidden space-y-8">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Tourist SIM Card & Internet Setup</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Get connected immediately upon arrival at Yangon (RGN) or Mandalay (MDL) International Airports.</p>
+            </div>
+
+            <!-- SIM Providers Comparison -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <!-- ATOM -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-yellow-400 text-slate-900 font-black flex items-center justify-center text-sm">ATOM</div>
+                    <h3 class="font-bold text-base">ATOM Myanmar</h3>
+                    <p class="text-xs text-slate-500">Fast 4G coverage in major cities. Official booths right outside airport baggage claim.</p>
+                    <div class="text-xs space-y-1 font-semibold text-slate-700 dark:text-slate-300">
+                        <p>• Tourist Pack: ~15,000 MMK</p>
+                        <p>• Data: 10 GB to 20 GB</p>
+                        <p>• Passport registration required</p>
+                    </div>
+                </div>
+
+                <!-- MYTEL -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-orange-500 text-white font-black flex items-center justify-center text-sm">Mytel</div>
+                    <h3 class="font-bold text-base">Mytel</h3>
+                    <p class="text-xs text-slate-500">Extensive coverage in regional towns and highways. Generous data packages.</p>
+                    <div class="text-xs space-y-1 font-semibold text-slate-700 dark:text-slate-300">
+                        <p>• Tourist Pack: ~12,000 MMK</p>
+                        <p>• Data: 15 GB</p>
+                        <p>• eSIM available at main shops</p>
+                    </div>
+                </div>
+
+                <!-- MPT -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-black flex items-center justify-center text-sm">MPT</div>
+                    <h3 class="font-bold text-base">MPT (State Tel)</h3>
+                    <p class="text-xs text-slate-500">Oldest state-run network with broadest coverage in remote mountains and islands.</p>
+                    <div class="text-xs space-y-1 font-semibold text-slate-700 dark:text-slate-300">
+                        <p>• Tourist Pack: ~15,000 MMK</p>
+                        <p>• Best for remote trekking</p>
+                    </div>
+                </div>
+
+                <!-- OOREDOO -->
+                <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-red-600 text-white font-black flex items-center justify-center text-sm">Ooredoo</div>
+                    <h3 class="font-bold text-base">Uoredoo / Ooredoo</h3>
+                    <p class="text-xs text-slate-500">Reliable urban signal in downtown Yangon and Mandalay business districts.</p>
+                    <div class="text-xs space-y-1 font-semibold text-slate-700 dark:text-slate-300">
+                        <p>• High-speed city LTE</p>
+                        <p>• Easy app top-ups</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-gradient-to-r from-myanmar-teal to-slate-900 text-white space-y-3">
+                <h3 class="font-bold text-lg"><i class="fa-solid fa-passport text-myanmar-gold mr-2"></i>SIM Buying Checklist at Airport</h3>
+                <ol class="text-xs sm:text-sm space-y-2 list-decimal list-inside text-slate-200">
+                    <li>Have your <strong>original passport</strong> ready (airport staff will scan photo page and visa stamp).</li>
+                    <li>Payment is usually accepted in <strong>Myanmar Kyat (MMK) cash</strong>. Change money at airport exchange counters before buying.</li>
+                    <li>Ask the booth staff to activate the data package and test internet access on your phone before walking away.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- VIEW 6: TRIP PLANNER & TOOLS -->
+        <section id="view-planner" class="view-section hidden space-y-8">
+            <div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Interactive Travel Tools</h1>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Estimate your daily travel budget and calculate MMK currency exchange rates.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Tool 1: Budget Estimator -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 bg-myanmar-gold/20 text-myanmar-gold rounded-xl text-xl"><i class="fa-solid fa-calculator"></i></div>
+                        <div>
+                            <h3 class="font-bold text-lg">Trip Budget Estimator</h3>
+                            <p class="text-xs text-slate-500">Calculate estimated expenses based on duration and style.</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">Number of Days in Myanmar</label>
+                            <input id="calc-days" type="number" value="7" min="1" max="28" oninput="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-myanmar-teal">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">Travel Style</label>
+                            <select id="calc-style" onchange="calculateTripBudget()" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-myanmar-teal">
+                                <option value="35">Backpacker ($35 USD / day)</option>
+                                <option value="75" selected>Standard Comfort ($75 USD / day)</option>
+                                <option value="180">Luxury & Boutique ($180 USD / day)</option>
+                            </select>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-myanmar-teal/10 dark:bg-slate-800 border border-myanmar-teal/20 space-y-2">
+                            <div class="flex justify-between text-xs font-bold"><span>Est. Accommodation & Food:</span><span id="res-acc">$0</span></div>
+                            <div class="flex justify-between text-xs font-bold"><span>Est. Transport & Entry Fees:</span><span id="res-trans">$0</span></div>
+                            <div class="border-t border-slate-200 dark:border-slate-700 pt-2 flex justify-between text-base font-extrabold text-myanmar-teal dark:text-myanmar-gold">
+                                <span>Estimated Total:</span>
+                                <span id="res-total">$0 USD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 2: Currency Quick Converter -->
+                <div class="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+                    <div class="flex items-center gap-3">
+                        <div class="p-3 bg-emerald-500/20 text-emerald-600 rounded-xl text-xl"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                        <div>
+                            <h3 class="font-bold text-lg">USD to MMK Converter</h3>
+                            <p class="text-xs text-slate-500">Quick estimate (Market reference rate: ~3,500 MMK / 1 USD).</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 mb-1">Amount in USD ($)</label>
+                            <input id="conv-usd" type="number" value="100" oninput="convertCurrency()" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-myanmar-teal">
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+                            <span class="text-xs text-slate-500 font-bold block mb-1">Equivalent in Myanmar Kyat</span>
+                            <span id="conv-mmk" class="text-2xl font-black text-emerald-600 dark:text-emerald-400">350,000 MMK</span>
+                        </div>
+
+                        <p class="text-[11px] text-slate-400 italic">Note: Exchange rates in local markets fluctuate. USD notes must be clean, uncreased, and crisp without ink marks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-myanmar-gold flex items-center justify-center text-white"><i class="fa-solid fa-pagoda text-xs"></i></div>
+                <span class="font-extrabold text-sm text-slate-800 dark:text-slate-200">Discover Myanmar Travel Hub</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
+                © 2026 Discover Myanmar. Designed for seamless exploration and visa guidance.
+            </p>
+            <div class="flex space-x-4 text-slate-400">
+                <a href="#" class="hover:text-myanmar-gold transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-myanmar-gold transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-myanmar-gold transition"><i class="fa-brands fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Destinations Data Set
+        const destinations = [
+            {
+                id: 1,
+                name: "Bagan Ancient City",
+                category: "culture",
+                image: "https://images.unsplash.com/photo-1512553353614-82a7370096dc?w=600&auto=format&fit=crop&q=80",
+                desc: "UNESCO World Heritage site with over 2,000 ancient Buddhist temples and stupas spread across golden plains.",
+                highlight: "Hot air balloon sunrise & e-bike exploring"
+            },
+            {
+                id: 2,
+                name: "Inle Lake & Shan Hills",
+                category: "nature",
+                image: "https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600&auto=format&fit=crop&q=80",
+                desc: "Famous for traditional leg-rowing fishermen, floating gardens, stilt villages, and serene mountain vistas.",
+                highlight: "Longtail boat tour & Indein Pagodas"
+            },
+            {
+                id: 3,
+                name: "Yangon & Shwedagon Pagoda",
+                category: "culture",
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&auto=format&fit=crop&q=80",
+                desc: "Myanmar's vibrant commercial capital featuring the world-famous 99-meter golden Shwedagon Pagoda.",
+                highlight: "Shwedagon sunset & colonial downtown walk"
+            },
+            {
+                id: 4,
+                name: "Ngapali Beach",
+                category: "beach",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&auto=format&fit=crop&q=80",
+                desc: "Pristine white sand palm-fringed coastlines along the Bay of Bengal with fresh seafood dining.",
+                highlight: "Relaxation, snorkeling & fresh lobster"
+            },
+            {
+                id: 5,
+                name: "Mandalay Cultural Capital",
+                category: "culture",
+                image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&auto=format&fit=crop&q=80",
+                desc: "The last royal capital of Myanmar surrounded by ancient cities of Amarapura, Sagaing, and Inwa.",
+                highlight: "U Bein Teak Bridge & Mandalay Hill"
+            },
+            {
+                id: 6,
+                name: "Hpa-An Karst Mountains",
+                category: "nature",
+                image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop&q=80",
+                desc: "Dramatic limestone karst mountain landscapes, massive cave temples, and Mount Zwegabin.",
+                highlight: "Saddar Cave & Bat Cave sunset"
+            }
+        ];
+
+        // Initialization on Load
+        window.onload = function() {
+            initTheme();
+            renderDestinations('all');
+            calculateTripBudget();
+            convertCurrency();
+            setupEventListeners();
+        };
+
+        // Theme Switch Logic
+        function initTheme() {
+            const themeBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            themeBtn.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.toggle('dark');
+                themeIcon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+                showToast(`Switched to ${isDark ? 'Dark' : 'Light'} Mode`, 'info');
+            });
+        }
+
+        // View Navigation Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            
+            const targetView = document.getElementById(`view-${tabId}`);
+            if (targetView) targetView.classList.remove('hidden');
+
+            // Reset Nav buttons style
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = 'nav-btn px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-myanmar-teal dark:hover:text-myanmar-gold hover:bg-slate-100 dark:hover:bg-slate-800 transition';
+            });
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = 'nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-myanmar-teal dark:text-myanmar-gold bg-myanmar-teal/10 dark:bg-slate-800 transition';
+            }
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Render Destinations
+        function renderDestinations(filterCategory) {
+            const grid = document.getElementById('destination-grid');
+            grid.innerHTML = '';
+
+            const filtered = filterCategory === 'all' 
+                ? destinations 
+                : destinations.filter(d => d.category === filterCategory);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition flex flex-col justify-between';
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
+                            <span class="absolute top-3 right-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-slate-900/70 text-white backdrop-blur-md uppercase">${item.category}</span>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <h3 class="font-extrabold text-lg text-slate-900 dark:text-white">${item.name}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs">
+                        <span class="text-myanmar-teal dark:text-myanmar-gold font-semibold"><i class="fa-solid fa-star mr-1"></i>${item.highlight}</span>
+                        <button onclick="showToast('Explore guide for ${item.name}', 'info')" class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"><i class="fa-solid fa-circle-arrow-right text-lg"></i></button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterDestinations(category) {
+            document.querySelectorAll('.dest-filter-btn').forEach(btn => {
+                btn.className = 'dest-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
+            });
+            event.target.className = 'dest-filter-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-myanmar-teal text-white';
+            renderDestinations(category);
+        }
+
+        // Toggle Visa Tabs
+        function toggleVisaTab(type) {
+            const foreignBtn = document.getElementById('visa-tab-foreign');
+            const citizenBtn = document.getElementById('visa-tab-citizens');
+            const foreignContent = document.getElementById('visa-content-foreign');
+            const citizenContent = document.getElementById('visa-content-citizens');
+
+            if (type === 'foreign') {
+                foreignBtn.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl bg-white dark:bg-slate-900 shadow text-myanmar-teal dark:text-myanmar-gold transition';
+                citizenBtn.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 transition';
+                foreignContent.classList.remove('hidden');
+                citizenContent.classList.add('hidden');
+            } else {
+                citizenBtn.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl bg-white dark:bg-slate-900 shadow text-myanmar-teal dark:text-myanmar-gold transition';
+                foreignBtn.className = 'flex-1 py-2.5 text-xs sm:text-sm font-bold rounded-xl text-slate-600 dark:text-slate-400 hover:text-slate-900 transition';
+                citizenContent.classList.remove('hidden');
+                foreignContent.classList.add('hidden');
+            }
+        }
+
+        // Budget Calculator Logic
+        function calculateTripBudget() {
+            const days = parseInt(document.getElementById('calc-days').value) || 1;
+            const styleCost = parseInt(document.getElementById('calc-style').value);
+
+            const accFood = Math.round(days * styleCost * 0.7);
+            const transEntry = Math.round(days * styleCost * 0.3);
+            const total = accFood + transEntry;
+
+            document.getElementById('res-acc').textContent = `$${accFood} USD`;
+            document.getElementById('res-trans').textContent = `$${transEntry} USD`;
+            document.getElementById('res-total').textContent = `$${total} USD`;
+        }
+
+        // Currency Converter Logic
+        function convertCurrency() {
+            const usd = parseFloat(document.getElementById('conv-usd').value) || 0;
+            const rate = 3500; // Reference rate
+            const mmk = Math.round(usd * rate);
+            document.getElementById('conv-mmk').textContent = `${mmk.toLocaleString()} MMK`;
+        }
+
+        // Toast Feedback Generator
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto px-4 py-3 rounded-xl shadow-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-xs font-semibold flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0';
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-myanmar-gold"></i><span>${message}</span>`;
+            
+            container.appendChild(toast);
+            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function setupEventListeners() {
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
