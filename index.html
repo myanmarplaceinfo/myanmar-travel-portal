@@ -820,3 +820,137 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Myanmar - Travel & Visa Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+    <!-- Navbar -->
+    <nav class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-compass text-amber-500 text-2xl"></i>
+                <span class="text-xl font-bold text-amber-400">Discover Myanmar</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#destinations" class="hover:text-amber-400 transition">Destinations</a>
+                <a href="#visa" class="hover:text-amber-400 transition">Visa Info</a>
+                <button onclick="scrollToSearch()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold px-4 py-2 rounded-lg transition">Explore Now</button>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-amber-400 text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800 bg-slate-950 px-4 py-4 space-y-3">
+            <a href="#destinations" class="block hover:text-amber-400">Destinations</a>
+            <a href="#visa" class="block hover:text-amber-400">Visa Info</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="max-w-7xl mx-auto px-4 py-16 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+            Explore the Magic of <span class="text-amber-400">Golden Myanmar</span>
+        </h1>
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-8">
+            Your all-in-one guide for travel destinations, visa guidelines, transport options, and hotel stays in Myanmar.
+        </p>
+
+        <!-- Search Bar Function -->
+        <div class="max-w-xl mx-auto flex gap-2 bg-slate-800 p-2 rounded-xl border border-slate-700">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 my-auto ml-3"></i>
+            <input type="text" id="search-input" onkeyup="filterDestinations()" placeholder="Search Bagan, Inle, Yangon..." class="w-full bg-transparent px-2 py-1 text-slate-100 focus:outline-none">
+        </div>
+    </header>
+
+    <!-- Destinations -->
+    <section id="destinations" class="max-w-7xl mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot"></i> Top Travel Destinations
+        </h2>
+        <div id="destination-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="card bg-slate-800 border border-slate-700 rounded-xl p-5 hover:border-amber-500/50 transition cursor-pointer" onclick="openModal('Bagan Ancient City', 'Bagan is an ancient city and a UNESCO World Heritage Site in Myanmar. From the 9th to 13th centuries, the city was the capital of the Pagan Kingdom.')">
+                <h3 class="text-xl font-semibold mb-2 text-slate-100">Bagan Ancient City</h3>
+                <p class="text-slate-400 text-sm">Thousands of ancient pagodas, hot air balloons, and breathtaking sunsets.</p>
+                <span class="text-xs text-amber-400 mt-4 inline-block">Click for details &rarr;</span>
+            </div>
+
+            <div class="card bg-slate-800 border border-slate-700 rounded-xl p-5 hover:border-amber-500/50 transition cursor-pointer" onclick="openModal('Inle Lake', 'Inle Lake is a freshwater lake located in the Nyaungshwe Township of Taunggyi District of Shan State. It is famous for its leg-rowing fishermen and floating gardens.')">
+                <h3 class="text-xl font-semibold mb-2 text-slate-100">Inle Lake</h3>
+                <p class="text-slate-400 text-sm">Floating gardens, unique leg-rowing fishermen, and serene lake views.</p>
+                <span class="text-xs text-amber-400 mt-4 inline-block">Click for details &rarr;</span>
+            </div>
+
+            <div class="card bg-slate-800 border border-slate-700 rounded-xl p-5 hover:border-amber-500/50 transition cursor-pointer" onclick="openModal('Yangon City', 'Yangon is the largest city in Myanmar. It is home to the glittering Shwedagon Pagoda and rich colonial-era architectural heritage.')">
+                <h3 class="text-xl font-semibold mb-2 text-slate-100">Yangon</h3>
+                <p class="text-slate-400 text-sm">Home to the iconic Shwedagon Pagoda and colonial heritage architecture.</p>
+                <span class="text-xs text-amber-400 mt-4 inline-block">Click for details &rarr;</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Modal Box (Interactive Pop-up) -->
+    <div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center p-4 z-50">
+        <div class="bg-slate-800 border border-slate-700 p-6 rounded-xl max-w-md w-full relative">
+            <button onclick="closeModal()" class="absolute top-3 right-4 text-slate-400 hover:text-white text-xl">&times;</button>
+            <h3 id="modal-title" class="text-2xl font-bold text-amber-400 mb-3"></h3>
+            <p id="modal-desc" class="text-slate-300 text-sm leading-relaxed mb-6"></p>
+            <button onclick="closeModal()" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold py-2 rounded-lg transition">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 text-center py-8 text-slate-500 text-sm mt-auto">
+        <p>&copy; 2026 Discover Myanmar Travel Portal. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Functions -->
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Search Filter Function
+        function filterDestinations() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('#destination-list .card');
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+
+        // Modal Functions
+        function openModal(title, desc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('modal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            document.getElementById('modal').classList.remove('flex');
+        }
+
+        function scrollToSearch() {
+            document.getElementById('search-input').focus();
+        }
+    </script>
+</body>
+</html>
