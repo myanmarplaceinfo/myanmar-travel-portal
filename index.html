@@ -1,362 +1,501 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover Myanmar - Modern Travel Portal</title>
+    <title>NexusPulse | Discover Myanmar Travel & Telecom Portal</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            50: '#fffbe1',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            cyan: '#06b6d4',
+                            accent: '#6366f1'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .tab-page { display: none; }
+        .tab-page.active { display: block; animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- Navbar -->
-    <nav class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <!-- Top Glow Effect -->
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-gradient-to-tr from-amber-500/20 via-indigo-500/20 to-cyan-500/20 blur-[120px] pointer-events-none -z-10"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
+            
+            <!-- Logo -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('explore')">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-slate-950 font-extrabold text-xl shadow-lg shadow-amber-500/20">
-                    M
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-indigo-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">
+                    N
                 </div>
                 <div>
-                    <span class="text-2xl font-black text-amber-400 block leading-none tracking-wide">Discover Myanmar</span>
-                    <span class="text-xs text-slate-400 font-medium">TRAVEL & VISA PORTAL</span>
+                    <span class="text-xl font-extrabold bg-gradient-to-r from-amber-400 via-orange-300 to-cyan-400 bg-clip-text text-transparent tracking-tight">NexusPulse</span>
+                    <span class="block text-[10px] text-slate-400 font-semibold uppercase tracking-widest">Myanmar Portal</span>
                 </div>
             </div>
-            
-            <!-- Desktop Navigation Tabs -->
-            <div class="hidden lg:flex space-x-2 items-center bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800 text-sm font-semibold">
-                <button onclick="switchTab('explore')" id="btn-explore" class="tab-btn px-4 py-2 rounded-xl text-amber-400 bg-slate-800 transition"><i class="fa-solid fa-compass mr-1.5"></i> Explore</button>
-                <button onclick="switchTab('visa')" id="btn-visa" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-passport mr-1.5"></i> Visa Hub</button>
-                <button onclick="switchTab('transport')" id="btn-transport" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-plane-departure mr-1.5"></i> Transport</button>
-                <button onclick="switchTab('hotels')" id="btn-hotels" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-hotel mr-1.5"></i> Hotels</button>
-                <button onclick="switchTab('simcards')" id="btn-simcards" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-sim-card mr-1.5"></i> SIM Cards</button>
-                <button onclick="switchTab('lifestyle')" id="btn-lifestyle" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-martini-glass-citrus mr-1.5"></i> Shopping & Bars</button>
+
+            <!-- Navigation Tabs (Desktop) -->
+            <div class="hidden lg:flex items-center space-x-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800/80 text-xs font-bold">
+                <button onclick="switchTab('explore')" id="nav-btn-explore" class="nav-btn px-4 py-2 rounded-xl text-amber-400 bg-slate-800/80 shadow transition"><i class="fa-solid fa-compass mr-1.5"></i> Explore</button>
+                <button onclick="switchTab('simcards')" id="nav-btn-simcards" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-signal mr-1.5"></i> Telecoms</button>
+                <button onclick="switchTab('visa')" id="nav-btn-visa" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-passport mr-1.5"></i> Visa Hub</button>
+                <button onclick="switchTab('transport')" id="nav-btn-transport" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-plane-departure mr-1.5"></i> Transport</button>
+                <button onclick="switchTab('hotels')" id="nav-btn-hotels" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-hotel mr-1.5"></i> Hotels</button>
+                <button onclick="switchTab('lifestyle')" id="nav-btn-lifestyle" class="nav-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-martini-glass-citrus mr-1.5"></i> Shopping & Bars</button>
             </div>
 
-            <!-- Mobile Menu Toggle Button -->
-            <button id="menu-btn" class="lg:hidden text-amber-400 text-2xl focus:outline-none">
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-toggle" class="lg:hidden text-amber-400 p-2 text-2xl focus:outline-none">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
-        <!-- Mobile Navigation Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-slate-950 px-4 py-4 space-y-2 text-sm">
-            <button onclick="switchTab('explore'); toggleMobileMenu()" class="block w-full text-left py-2 text-amber-400 font-bold">Explore (14 States & Regions)</button>
-            <button onclick="switchTab('visa'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Visa Hub</button>
-            <button onclick="switchTab('transport'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Transport</button>
-            <button onclick="switchTab('hotels'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Hotels & Stays</button>
-            <button onclick="switchTab('simcards'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">SIM Cards</button>
-            <button onclick="switchTab('lifestyle'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Shopping & Nightlife</button>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800/80 bg-slate-950 px-4 py-4 space-y-2 text-sm font-semibold">
+            <button onclick="switchTab('explore'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 rounded-lg text-amber-400 bg-slate-900"><i class="fa-solid fa-compass mr-2"></i> Explore (14 Regions)</button>
+            <button onclick="switchTab('simcards'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 rounded-lg text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-signal mr-2"></i> Telecom & SIM Cards</button>
+            <button onclick="switchTab('visa'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 rounded-lg text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-passport mr-2"></i> Visa Hub</button>
+            <button onclick="switchTab('transport'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 rounded-lg text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-plane-departure mr-2"></i> Transport</button>
+            <button onclick="switchTab('hotels'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 rounded-lg text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-hotel mr-2"></i> Hotels & Stays</button>
+            <button onclick="switchTab('lifestyle'); toggleMobileMenu()" class="block w-full text-left py-2.5 px-3 rounded-lg text-slate-300 hover:bg-slate-900"><i class="fa-solid fa-martini-glass-citrus mr-2"></i> Shopping & Bars</button>
         </div>
     </nav>
 
-    <!-- Main Content Header -->
-    <header class="max-w-7xl mx-auto px-4 pt-12 pb-6 text-center">
-        <h1 class="text-3xl md:text-5xl font-extrabold mb-3 text-amber-400 tracking-tight">
-            Explore the Magic of Golden Myanmar
+    <!-- Hero Header -->
+    <header class="max-w-7xl mx-auto px-4 pt-10 pb-6 text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold mb-4">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Next-Gen Analytics & Travel Workspace
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+            Discover <span class="bg-gradient-to-r from-amber-400 via-orange-400 to-cyan-400 bg-clip-text text-transparent">Golden Myanmar</span>
         </h1>
-        <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-6">
-            Your premium gateway for travel destinations, e-visas, luxury stays, transport, and local experiences.
+        <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mt-3">
+            Unified platform for destination discovery, telecom network guides, e-visas, transport bookings, and luxury stays.
         </p>
 
-        <!-- Global Search Bar -->
-        <div class="max-w-xl mx-auto flex gap-2 bg-slate-900 p-2 rounded-2xl border border-slate-800 shadow-xl">
-            <i class="fa-solid fa-magnifying-glass text-slate-500 my-auto ml-3"></i>
-            <input type="text" id="search-input" onkeyup="filterCards()" placeholder="Search Bagan, Inle, Flight, Visa, Hotels..." class="w-full bg-transparent px-2 py-1 text-slate-100 focus:outline-none text-sm">
+        <!-- Search Bar -->
+        <div class="max-w-xl mx-auto mt-6 flex items-center gap-2 bg-slate-900/90 p-2 rounded-2xl border border-slate-800 shadow-2xl focus-within:border-amber-500/50 transition">
+            <i class="fa-solid fa-magnifying-glass text-slate-500 ml-3"></i>
+            <input type="text" id="search-input" onkeyup="filterCards()" placeholder="Search Bagan, MPT, Air KBZ, Visa, Hotels..." class="w-full bg-transparent px-2 py-1.5 text-slate-100 placeholder-slate-500 focus:outline-none text-sm font-medium">
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-6 w-full">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full">
 
-        <!-- PAGE 1: EXPLORE (14 States & Regions with Images) -->
-        <section id="tab-explore" class="tab-content active">
-            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-earth-asia"></i> 14 States & Regions of Myanmar
-            </h2>
-            <div id="card-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                
+        <!-- TAB 1: EXPLORE (14 STATES & REGIONS) -->
+        <section id="tab-explore" class="tab-page active">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-extrabold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot text-amber-400"></i> Explore 14 States & Regions
+                </h2>
+                <span class="text-xs text-slate-400 font-semibold bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">14 Destinations</span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Yangon -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Yangon" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80" alt="Yangon Shwedagon" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">Region</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Yangon Region</h3>
-                        <p class="text-slate-400 text-sm mt-1">Shwedagon Pagoda, Colonial Heritage Buildings, Kandawgyi Park & Local Night Markets.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Yangon Region</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Shwedagon Pagoda, Colonial heritage buildings, Kandawgyi Park, and Chinatown night market.</p>
                     </div>
                 </div>
 
-                <!-- Mandalay -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=600&q=80" alt="Mandalay & Bagan" class="w-full h-48 object-cover">
+                <!-- Mandalay & Bagan -->
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=800&q=80" alt="Bagan Mandalay" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">Region</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Mandalay Region (Bagan)</h3>
-                        <p class="text-slate-400 text-sm mt-1">UNESCO World Heritage Bagan pagodas, U Bein Bridge, and Mandalay Palace.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Mandalay Region (Bagan)</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">UNESCO Ancient Bagan temples, Mandalay Palace, U Bein Bridge, and Mingun.</p>
                     </div>
                 </div>
 
-                <!-- Shan -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=600&q=80" alt="Shan State" class="w-full h-48 object-cover">
+                <!-- Shan State -->
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80" alt="Inle Lake Shan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Shan State (Inle Lake)</h3>
-                        <p class="text-slate-400 text-sm mt-1">Leg-rowing fishermen, floating gardens, Kalaw pine forests, and cool mountain weather.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Shan State (Inle Lake)</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Inle Lake leg-rowing fishermen, Kalaw trekking, Taunggyi, and Kakku Pagodas.</p>
                     </div>
                 </div>
 
                 <!-- Rakhine -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Rakhine Beach" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Ngapali Beach" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Rakhine State (Ngapali)</h3>
-                        <p class="text-slate-400 text-sm mt-1">Pristine white-sand beaches at Ngapali and ancient Mrauk-U archaeological kingdom.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Rakhine State (Ngapali)</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Ngapali turquoise beach, white sands, and ancient Mrauk-U archaeological temples.</p>
                     </div>
                 </div>
 
                 <!-- Kachin -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Kachin Mountains" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Kachin Snow Peak" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Kachin State</h3>
-                        <p class="text-slate-400 text-sm mt-1">Hkakabo Razi snow peaks, Indawgyi Lake, and rich northern nature landscapes.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Kachin State</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Snow-capped Hkakabo Razi, Indawgyi Lake, and Myitkyina scenery.</p>
                     </div>
                 </div>
 
                 <!-- Kayin -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Hpa-An Kayin" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Hpa-An Kayin" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Kayin State (Hpa-An)</h3>
-                        <p class="text-slate-400 text-sm mt-1">Limestone mountains, natural caves, Saddar Cave, and Mount Zwekabin views.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Kayin State (Hpa-An)</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Hpa-An karst mountain pillars, Saddar limestone cave, and Zwekabin views.</p>
                     </div>
                 </div>
 
                 <!-- Tanintharyi -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Tanintharyi Islands" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Mergui Islands" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">Region</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Tanintharyi Region</h3>
-                        <p class="text-slate-400 text-sm mt-1">Mergui Archipelago with over 800 tropical islands, diving, and Dawei coast.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Tanintharyi Region</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Mergui Archipelago with 800+ islands, scuba diving, and Dawei beaches.</p>
                     </div>
                 </div>
 
                 <!-- Ayeyarwady -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Ayeyarwady Beaches" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Chaung Tha Beach" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">Region</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Ayeyarwady Region</h3>
-                        <p class="text-slate-400 text-sm mt-1">Chaung Tha & Ngwe Saung beach resorts and Pathein river delta culture.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Ayeyarwady Region</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Chaung Tha & Ngwe Saung seaside resorts, and Pathein Delta culture.</p>
                     </div>
                 </div>
 
                 <!-- Mon -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=600&q=80" alt="Mon State" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=800&q=80" alt="Mon State" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Mon State</h3>
-                        <p class="text-slate-400 text-sm mt-1">Kyaiktiyo Golden Rock Pagoda, Mawlamyine coastal city, and Win Sein Reclining Buddha.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Mon State</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Kyaiktiyo Golden Rock, Mawlamyine coastal town, and Mudon Reclining Buddha.</p>
                     </div>
                 </div>
 
                 <!-- Chin -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Chin State" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Chin Hills" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Chin State</h3>
-                        <p class="text-slate-400 text-sm mt-1">Mount Victoria (Nat Ma Taung), heart-shaped Rih Lake, and mountain culture.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Chin State</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Nat Ma Taung (Mount Victoria), heart-shaped Rih Lake, and mountain ethnic traditions.</p>
                     </div>
                 </div>
 
                 <!-- Kayah -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Kayah State" class="w-full h-48 object-cover">
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Kayah Loikaw" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">State</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Kayah State</h3>
-                        <p class="text-slate-400 text-sm mt-1">Loikaw Taung Kwe Pagoda on craggy limestone and scenic mountain landscapes.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Kayah State</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Loikaw Taung Kwe Pagoda set on jagged limestone rocks and unique culture.</p>
                     </div>
                 </div>
 
-                <!-- Sagaing, Magway, Bago Combined Card -->
-                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Central Myanmar" class="w-full h-48 object-cover">
+                <!-- Bago, Sagaing, Magway -->
+                <div class="search-card glass-card rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 group">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80" alt="Central Regions" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 left-3 text-[10px] font-extrabold uppercase px-2.5 py-1 bg-slate-950/80 text-amber-400 backdrop-blur rounded-md border border-amber-500/30">Regions</span>
+                    </div>
                     <div class="p-5">
-                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Regions</span>
-                        <h3 class="text-xl font-bold text-white mt-2">Sagaing, Magway & Bago</h3>
-                        <p class="text-slate-400 text-sm mt-1">Mingun Bell, Monywa Standing Buddha, Minbu mud volcanoes, and ancient Bago palace.</p>
+                        <h3 class="text-lg font-bold text-white group-hover:text-amber-400 transition">Sagaing, Magway & Bago</h3>
+                        <p class="text-slate-400 text-xs mt-2 leading-relaxed">Mingun Pagoda bell, Monywa Standing Buddha, Minbu mud volcanoes, and Pyu cities.</p>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- PAGE 2: VISA HUB -->
-        <section id="tab-visa" class="tab-content">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-4xl mx-auto shadow-xl">
+        <!-- TAB 2: TELECOM & SIM CARDS WITH REAL LOGOS -->
+        <section id="tab-simcards" class="tab-page">
+            <h2 class="text-2xl font-extrabold text-white mb-2 flex items-center gap-2">
+                <i class="fa-solid fa-tower-cell text-cyan-400"></i> Telecom Operators & Tourist SIM Guide
+            </h2>
+            <p class="text-slate-400 text-xs mb-8">Official mobile network operators in Myanmar for tourists and locals.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- MPT Card -->
+                <div class="search-card glass-card p-6 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-20 bg-slate-950 rounded-xl flex items-center justify-center p-3 mb-4 border border-slate-800/80">
+                            <!-- Official MPT SVG Style Logo -->
+                            <svg class="h-10 w-auto" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="60" rx="8" fill="#1e293b"/>
+                                <path d="M25 18H38L45 35L52 18H65V42H55V27L48 42H42L35 27V42H25V18Z" fill="#F59E0B"/>
+                                <path d="M72 18H95C102 18 106 22 106 28C106 34 102 38 95 38H82V42H72V18ZM82 30H93C95 30 97 29 97 28C97 27 95 26 93 26H82V30Z" fill="#38BDF8"/>
+                                <path d="M115 18H145V26H135V42H125V26H115V18Z" fill="#F59E0B"/>
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold px-2 py-0.5 bg-amber-500/10 text-amber-400 rounded border border-amber-500/20">State-Owned</span>
+                        <h3 class="text-lg font-bold text-white mt-2">MPT Myanmar</h3>
+                        <p class="text-slate-400 text-xs mt-2">Widest 3G/4G coverage across remote states and regions in Myanmar.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                        <p><i class="fa-solid fa-check text-amber-400 mr-1"></i> SIM Registration: Passport required</p>
+                    </div>
+                </div>
+
+                <!-- ATOM Card -->
+                <div class="search-card glass-card p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-20 bg-slate-950 rounded-xl flex items-center justify-center p-3 mb-4 border border-slate-800/80">
+                            <!-- Official ATOM SVG Style Logo -->
+                            <svg class="h-10 w-auto" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="60" rx="8" fill="#0f172a"/>
+                                <circle cx="35" cy="30" r="14" fill="#06B6D4"/>
+                                <circle cx="35" cy="30" r="6" fill="#0284C7"/>
+                                <text x="60" y="38" fill="#FFFFFF" font-family="sans-serif" font-weight="900" font-size="24">ATOM</text>
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold px-2 py-0.5 bg-cyan-500/10 text-cyan-400 rounded border border-cyan-500/20">4G LTE Leader</span>
+                        <h3 class="text-lg font-bold text-white mt-2">ATOM Myanmar</h3>
+                        <p class="text-slate-400 text-xs mt-2">Fast data speeds in Yangon, Mandalay, Bagan, and tourist cities.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                        <p><i class="fa-solid fa-check text-cyan-400 mr-1"></i> eSIM & Physical Tourist SIM available</p>
+                    </div>
+                </div>
+
+                <!-- Mytel Card -->
+                <div class="search-card glass-card p-6 rounded-2xl border border-slate-800 hover:border-orange-500/50 transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-20 bg-slate-950 rounded-xl flex items-center justify-center p-3 mb-4 border border-slate-800/80">
+                            <!-- Official Mytel SVG Style Logo -->
+                            <svg class="h-10 w-auto" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="60" rx="8" fill="#18181b"/>
+                                <path d="M25 38C25 24 35 18 45 18C55 18 65 24 65 38" stroke="#F97316" stroke-width="6" stroke-linecap="round"/>
+                                <circle cx="45" cy="35" r="5" fill="#E11D48"/>
+                                <text x="75" y="38" fill="#FFFFFF" font-family="sans-serif" font-weight="800" font-size="22">Mytel</text>
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold px-2 py-0.5 bg-orange-500/10 text-orange-400 rounded border border-orange-500/20">High Data Allowance</span>
+                        <h3 class="text-lg font-bold text-white mt-2">Mytel Telecom</h3>
+                        <p class="text-slate-400 text-xs mt-2">Competitive high-volume internet packs and fiber connections.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                        <p><i class="fa-solid fa-check text-orange-400 mr-1"></i> Tourist Pack: Airport counter available</p>
+                    </div>
+                </div>
+
+                <!-- Ooredoo / Ucell Card -->
+                <div class="search-card glass-card p-6 rounded-2xl border border-slate-800 hover:border-red-500/50 transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-full h-20 bg-slate-950 rounded-xl flex items-center justify-center p-3 mb-4 border border-slate-800/80">
+                            <!-- Official Ooredoo SVG Style Logo -->
+                            <svg class="h-10 w-auto" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="60" rx="8" fill="#020617"/>
+                                <circle cx="30" cy="30" r="10" stroke="#EF4444" stroke-width="5"/>
+                                <circle cx="48" cy="30" r="10" stroke="#EF4444" stroke-width="5"/>
+                                <text x="70" y="37" fill="#EF4444" font-family="sans-serif" font-weight="900" font-size="20">ooredoo</text>
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold px-2 py-0.5 bg-red-500/10 text-red-400 rounded border border-red-500/20">Metro Digital</span>
+                        <h3 class="text-lg font-bold text-white mt-2">Ooredoo Telecom</h3>
+                        <p class="text-slate-400 text-xs mt-2">Strong urban presence in Yangon, Mandalay, and Naypyidaw.</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[11px] text-slate-400">
+                        <p><i class="fa-solid fa-check text-red-400 mr-1"></i> Fast data top-up via mobile app</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: VISA HUB -->
+        <section id="tab-visa" class="tab-page">
+            <div class="glass-card max-w-4xl mx-auto rounded-3xl p-8 border border-slate-800 shadow-2xl">
                 <div class="flex items-center gap-4 mb-6">
-                    <div class="w-14 h-14 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-2xl">
+                    <div class="w-14 h-14 bg-gradient-to-tr from-amber-500 to-orange-500 rounded-2xl flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-amber-500/20">
                         <i class="fa-solid fa-passport"></i>
                     </div>
                     <div>
-                        <h2 class="text-2xl font-bold text-white">Official Myanmar e-Visa Portal</h2>
-                        <p class="text-slate-400 text-sm">Ministry of Immigration and Population Official Guidelines</p>
+                        <h2 class="text-2xl font-black text-white">Official e-Visa Application Portal</h2>
+                        <p class="text-slate-400 text-xs mt-1">Ministry of Immigration & Population Official eVisa System</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                    <div class="bg-slate-950/80 p-6 rounded-2xl border border-slate-800">
                         <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">Tourist e-Visa</span>
-                        <ul class="text-sm text-slate-300 space-y-2">
-                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Stay Duration:</b> Up to 28 days</li>
-                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Validity:</b> 90 days from approval</li>
-                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Processing Time:</b> 3 Working Days</li>
+                        <ul class="text-xs text-slate-300 space-y-2.5">
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-amber-400 mr-2"></i> <b>Stay Duration:</b> Up to 28 Days</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-amber-400 mr-2"></i> <b>Validity:</b> 90 Days from approval date</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-amber-400 mr-2"></i> <b>Processing Time:</b> ~3 Business Days</li>
                         </ul>
                     </div>
 
-                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800">
-                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">Business e-Visa</span>
-                        <ul class="text-sm text-slate-300 space-y-2">
-                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Stay Duration:</b> Up to 70 days</li>
-                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Requirement:</b> Company Invitation Letter</li>
-                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Entry Type:</b> Single Entry</li>
+                    <div class="bg-slate-950/80 p-6 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-bold text-cyan-400 uppercase tracking-wider block mb-2">Business e-Visa</span>
+                        <ul class="text-xs text-slate-300 space-y-2.5">
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-cyan-400 mr-2"></i> <b>Stay Duration:</b> Up to 70 Days</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-cyan-400 mr-2"></i> <b>Requirement:</b> Company Invitation Letter</li>
+                            <li class="flex items-center"><i class="fa-solid fa-circle-check text-cyan-400 mr-2"></i> <b>Entry Type:</b> Single Entry</li>
                         </ul>
                     </div>
                 </div>
 
-                <a href="https://evisa.moip.gov.mm" target="_blank" class="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-4 rounded-xl shadow-lg transition">
-                    Apply Official e-Visa Directly <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+                <a href="https://evisa.moip.gov.mm" target="_blank" class="block w-full text-center bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:opacity-90 text-slate-950 font-extrabold py-4 rounded-xl shadow-lg transition">
+                    Apply Official Myanmar e-Visa <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
                 </a>
             </div>
         </section>
 
-        <!-- PAGE 3: TRANSPORT -->
-        <section id="tab-transport" class="tab-content">
-            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-plane-departure"></i> Transportation & Booking
+        <!-- TAB 4: TRANSPORT -->
+        <section id="tab-transport" class="tab-page">
+            <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-plane-departure text-amber-400"></i> Transport & Ticket Bookings
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Flight Tickets -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-plane text-amber-400"></i> Domestic & International Flights</h3>
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-plane text-cyan-400"></i> Domestic & International Flights</h3>
                     <div class="space-y-3">
-                        <a href="https://flymya.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
-                            <span class="font-semibold text-slate-200">Flymya Flight Booking Portal</span>
-                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        <a href="https://flymya.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/50 transition group">
+                            <span class="font-semibold text-slate-200 group-hover:text-cyan-400 transition text-sm">Flymya Air Ticket Portal</span>
+                            <i class="fa-solid fa-arrow-right-long text-slate-500 group-hover:text-cyan-400 transition"></i>
                         </a>
-                        <a href="https://www.flymna.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
-                            <span class="font-semibold text-slate-200">Myanmar National Airlines (MNA)</span>
-                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        <a href="https://www.flymna.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/50 transition group">
+                            <span class="font-semibold text-slate-200 group-hover:text-cyan-400 transition text-sm">Myanmar National Airlines (MNA)</span>
+                            <i class="fa-solid fa-arrow-right-long text-slate-500 group-hover:text-cyan-400 transition"></i>
                         </a>
-                        <a href="https://www.maiair.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
-                            <span class="font-semibold text-slate-200">Air KBZ / MAI Official Site</span>
-                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        <a href="https://www.maiair.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-cyan-500/50 transition group">
+                            <span class="font-semibold text-slate-200 group-hover:text-cyan-400 transition text-sm">MAI / Air KBZ Official</span>
+                            <i class="fa-solid fa-arrow-right-long text-slate-500 group-hover:text-cyan-400 transition"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Express Buses -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-bus text-amber-400"></i> Highway Express Bus</h3>
+                <div class="glass-card rounded-2xl p-6 border border-slate-800">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-bus text-amber-400"></i> Express Highway Buses</h3>
                     <div class="space-y-3">
-                        <a href="https://mmbusticket.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
-                            <span class="font-semibold text-slate-200">MMBusTicket Express Booking</span>
-                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        <a href="https://mmbusticket.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500/50 transition group">
+                            <span class="font-semibold text-slate-200 group-hover:text-amber-400 transition text-sm">MMBusTicket Express Booking</span>
+                            <i class="fa-solid fa-arrow-right-long text-slate-500 group-hover:text-amber-400 transition"></i>
                         </a>
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
-                            <span class="text-xs font-bold text-amber-400 block mb-1">Bus Terminals</span>
-                            <p class="text-xs text-slate-300"><b>Yangon:</b> Aung Mingalar & Kyee Myindaing Terminal<br><b>Mandalay:</b> Chan Mya Thazi Highway Terminal</p>
+                            <span class="text-xs font-bold text-amber-400 block mb-1">Key Terminals</span>
+                            <p class="text-xs text-slate-400 leading-relaxed"><b>Yangon:</b> Aung Mingalar & Kyee Myindaing<br><b>Mandalay:</b> Chan Mya Thazi Terminal</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PAGE 4: HOTELS -->
-        <section id="tab-hotels" class="tab-content">
-            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-hotel"></i> Hotels & Accommodation Booking
+        <!-- TAB 5: HOTELS -->
+        <section id="tab-hotels" class="tab-page">
+            <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-hotel text-cyan-400"></i> Hotel & Accommodation Booking
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="https://www.agoda.com" target="_blank" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500 transition shadow-lg">
-                    <i class="fa-solid fa-bed text-4xl text-amber-400 mb-3 block"></i>
-                    <h3 class="font-bold text-lg text-white">Agoda</h3>
-                    <p class="text-xs text-slate-400 mt-2">Best hotel rates in Yangon, Bagan, Mandalay, and Inle Lake.</p>
+                <a href="https://www.agoda.com" target="_blank" class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-amber-500/50 transition text-center group">
+                    <i class="fa-solid fa-bed text-3xl text-amber-400 mb-3 block group-hover:scale-110 transition"></i>
+                    <h3 class="font-bold text-white text-base">Agoda</h3>
+                    <p class="text-xs text-slate-400 mt-2">Direct rates for hotels in Yangon, Bagan, Mandalay, and Inle Lake.</p>
                 </a>
-                <a href="https://www.booking.com" target="_blank" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500 transition shadow-lg">
-                    <i class="fa-solid fa-building text-4xl text-amber-400 mb-3 block"></i>
-                    <h3 class="font-bold text-lg text-white">Booking.com</h3>
-                    <p class="text-xs text-slate-400 mt-2">Global booking platform with hotels and resorts across Myanmar.</p>
+                <a href="https://www.booking.com" target="_blank" class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition text-center group">
+                    <i class="fa-solid fa-building text-3xl text-cyan-400 mb-3 block group-hover:scale-110 transition"></i>
+                    <h3 class="font-bold text-white text-base">Booking.com</h3>
+                    <p class="text-xs text-slate-400 mt-2">Worldwide platform with resorts and luxury stays in Myanmar.</p>
                 </a>
-                <a href="https://www.traveloka.com" target="_blank" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500 transition shadow-lg">
-                    <i class="fa-solid fa-suitcase text-4xl text-amber-400 mb-3 block"></i>
-                    <h3 class="font-bold text-lg text-white">Traveloka Stays</h3>
-                    <p class="text-xs text-slate-400 mt-2">Southeast Asia’s top hotel and resort reservation service.</p>
+                <a href="https://www.traveloka.com" target="_blank" class="glass-card p-6 rounded-2xl border border-slate-800 hover:border-indigo-500/50 transition text-center group">
+                    <i class="fa-solid fa-suitcase text-3xl text-indigo-400 mb-3 block group-hover:scale-110 transition"></i>
+                    <h3 class="font-bold text-white text-base">Traveloka</h3>
+                    <p class="text-xs text-slate-400 mt-2">Popular Southeast Asian engine for hotels and flight combos.</p>
                 </a>
             </div>
         </section>
 
-        <!-- PAGE 5: SIM CARDS -->
-        <section id="tab-simcards" class="tab-content">
-            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-sim-card"></i> Tourist SIM Cards & Mobile Internet
-            </h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fa-solid fa-signal text-amber-400 text-3xl mb-3 block"></i>
-                    <h3 class="font-bold text-white text-lg">MPT</h3>
-                    <span class="text-xs text-slate-400 block mt-1">National Network</span>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fa-solid fa-wifi text-amber-400 text-3xl mb-3 block"></i>
-                    <h3 class="font-bold text-white text-lg">ATOM</h3>
-                    <span class="text-xs text-slate-400 block mt-1">High-Speed 4G</span>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fa-solid fa-tower-cell text-amber-400 text-3xl mb-3 block"></i>
-                    <h3 class="font-bold text-white text-lg">Mytel</h3>
-                    <span class="text-xs text-slate-400 block mt-1">Data Packages</span>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
-                    <i class="fa-solid fa-globe text-amber-400 text-3xl mb-3 block"></i>
-                    <h3 class="font-bold text-white text-lg">Ucell / Ooredoo</h3>
-                    <span class="text-xs text-slate-400 block mt-1">City Coverage</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- PAGE 6: SHOPPING & BARS -->
-        <section id="tab-lifestyle" class="tab-content">
-            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-martini-glass-citrus"></i> Shopping Malls & Nightlife Bars
+        <!-- TAB 6: SHOPPING & BARS -->
+        <section id="tab-lifestyle" class="tab-page">
+            <h2 class="text-2xl font-extrabold text-white mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-martini-glass-citrus text-amber-400"></i> Shopping Malls & Nightlife Bars
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-                    <h3 class="font-bold text-xl text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-amber-400"></i> Top Shopping Places</h3>
-                    <ul class="text-sm space-y-3 text-slate-300">
-                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Bogyoke Aung San Market:</b> Myanmar Gems, Jade, Handicrafts, and Souvenirs.</li>
-                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Junction City & Myanmar Plaza:</b> Premium Malls with international brands.</li>
-                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Zay Cho Market Mandalay:</b> Traditional textiles and regional food items.</li>
-                    </ul>
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <h3 class="font-bold text-lg text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-amber-400"></i> Top Shopping Places</h3>
+                    <div class="space-y-3 text-xs text-slate-300">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800"><b>Bogyoke Aung San Market:</b> Myanmar Jade, Gems, Handicrafts, and Longyi.</div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800"><b>Junction City & Myanmar Plaza:</b> Modern international shopping malls in Yangon.</div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800"><b>Zay Cho Market Mandalay:</b> Traditional silk, textiles, and local delicacies.</div>
+                    </div>
                 </div>
 
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
-                    <h3 class="font-bold text-xl text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-beer-mug-empty text-amber-400"></i> Nightlife & Bars</h3>
-                    <ul class="text-sm space-y-3 text-slate-300">
-                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Yangon 19th Street Chinatown:</b> Vibrant Street BBQ and draught beer spot.</li>
-                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Rooftop Lounges:</b> Atlas Rooftop Bar & Vista Bar with Shwedagon views.</li>
-                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Bagan Sunset Lounges:</b> Riverside dining along the Ayeyarwady river.</li>
-                    </ul>
+                <div class="glass-card p-6 rounded-2xl border border-slate-800">
+                    <h3 class="font-bold text-lg text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-beer-mug-empty text-cyan-400"></i> Popular Nightlife Spots</h3>
+                    <div class="space-y-3 text-xs text-slate-300">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800"><b>Yangon 19th Street Chinatown:</b> Lively street BBQ and draught beer stalls.</div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800"><b>Rooftop Bars:</b> Atlas Rooftop Bar & Vista Bar with direct Shwedagon views.</div>
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800"><b>Bagan River Lounges:</b> Sunset drinks overlooking the Ayeyarwady River.</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -364,54 +503,57 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-slate-800 text-center py-6 text-slate-500 text-xs bg-slate-950 mt-12">
-        <p>&copy; 2026 Discover Myanmar Travel Portal. All rights reserved.</p>
+    <footer class="border-t border-slate-800/80 text-center py-6 text-slate-500 text-xs bg-slate-950/80 mt-12">
+        <p>&copy; 2026 NexusPulse Travel & Telecom Analytics Portal. Built for high-performance discovery.</p>
     </footer>
 
-    <!-- JavaScript Functions for Tab Switching and Search -->
+    <!-- JavaScript Navigation & Search Engine -->
     <script>
-        function switchTab(tabName) {
-            // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => content.classList.remove('active'));
+        function switchTab(tabId) {
+            // Hide all tab pages
+            const pages = document.querySelectorAll('.tab-page');
+            pages.forEach(page => page.classList.remove('active'));
 
-            // Deactivate all buttons
-            const buttons = document.querySelectorAll('.tab-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-slate-800', 'text-amber-400');
+            // Reset navigation button styles
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('bg-slate-800/80', 'text-amber-400', 'shadow');
                 btn.classList.add('text-slate-400');
             });
 
-            // Activate selected tab content
-            document.getElementById('tab-' + tabName).classList.add('active');
+            // Show selected page
+            const selectedPage = document.getElementById('tab-' + tabId);
+            if (selectedPage) {
+                selectedPage.classList.add('active');
+            }
 
-            // Activate selected button
-            const activeBtn = document.getElementById('btn-' + tabName);
-            if(activeBtn) {
-                activeBtn.classList.add('bg-slate-800', 'text-amber-400');
-                activeBtn.classList.remove('text-slate-400');
+            // Highlight selected navigation button
+            const selectedBtn = document.getElementById('nav-btn-' + tabId);
+            if (selectedBtn) {
+                selectedBtn.classList.add('bg-slate-800/80', 'text-amber-400', 'shadow');
+                selectedBtn.classList.remove('text-slate-400');
             }
         }
 
         function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         }
 
-        document.getElementById('menu-btn').addEventListener('click', toggleMobileMenu);
+        document.getElementById('mobile-toggle').addEventListener('click', toggleMobileMenu);
 
         function filterCards() {
             const query = document.getElementById('search-input').value.toLowerCase();
-            const cards = document.querySelectorAll('.searchable-card');
-            
-            // Switch to explore tab if user searches
+            const cards = document.querySelectorAll('.search-card');
+
+            // Switch automatically to explore tab if user types in search
             if (query.trim() !== '') {
                 switchTab('explore');
             }
 
             cards.forEach(card => {
-                const text = card.innerText.toLowerCase();
-                card.style.display = text.includes(query) ? 'block' : 'none';
+                const content = card.innerText.toLowerCase();
+                card.style.display = content.includes(query) ? 'block' : 'none';
             });
         }
     </script>
