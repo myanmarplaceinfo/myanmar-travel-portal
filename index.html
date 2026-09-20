@@ -1,88 +1,154 @@
 <!DOCTYPE html>
-<html lang="my" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myanmar Info Directory</title>
+    <title>Myanmar Info - Travel & Local Directory</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .modal { transition: opacity 0.25s ease; }
-        body { font-family: system-ui, -apple-system, sans-serif; }
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-40 bg-slate-900 text-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <i class="fa-solid fa-compass text-amber-400 text-2xl"></i>
-                <span class="text-xl font-bold tracking-wide">Myanmar Info</span>
-            </div>
-            <nav class="hidden md:flex space-x-6 text-sm font-medium">
-                <a href="#regions" class="hover:text-amber-400">Regions & States</a>
-                <a href="#telecom" class="hover:text-amber-400">Telecoms</a>
-                <a href="#visa" class="hover:text-amber-400">Visa Guide</a>
-                <a href="#transport" class="hover:text-amber-400">Transport</a>
-                <a href="#lifestyle" class="hover:text-amber-400">Shopping & Bars</a>
+    <!-- Header / Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-slate-900 font-extrabold text-xl shadow-lg shadow-amber-500/20 group-hover:scale-105 transition duration-300">
+                    M
+                </div>
+                <div>
+                    <span class="text-lg font-extrabold tracking-tight block leading-none">MYANMAR INFO</span>
+                    <span class="text-[10px] text-amber-400 font-medium tracking-widest uppercase">Directory & Guide</span>
+                </div>
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#regions" class="hover:text-amber-400 transition-colors">Regions</a>
+                <a href="#telecom" class="hover:text-amber-400 transition-colors">Telecom</a>
+                <a href="#visa" class="hover:text-amber-400 transition-colors">Visa & Passport</a>
+                <a href="#transport" class="hover:text-amber-400 transition-colors">Transport</a>
+                <a href="#lifestyle" class="hover:text-amber-400 transition-colors">Shopping & Nightlife</a>
             </nav>
-            <div class="text-xs text-slate-400 border border-slate-700 px-3 py-1 rounded-full">
-                Designed by <span class="text-amber-400 font-semibold">NexusPulse Design</span>
-            </div>
+
+            <!-- Quick Action Button -->
+            <a href="#regions" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg bg-amber-500 text-slate-950 hover:bg-amber-400 transition shadow-sm">
+                Explore Directory
+            </a>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-slate-800 text-white py-16 px-4 text-center relative overflow-hidden">
-        <div class="max-w-4xl mx-auto relative z-10">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4">မြန်မာနိုင်ငံ ခရီးသွားနှင့် ဒေသဆိုင်ရာ လမ်းညွှန်</h1>
-            <p class="text-slate-300 text-base md:text-lg mb-6">တိုင်းနှင့်ပြည်နယ်များ၏ လည်ပတ်စရာများ၊ သယ်ယူပို့ဆောင်ရေး၊ ဗီဇာလမ်းညွှန်နှင့် ဈေးဝယ်/အပန်းဖြေစခန်းများ</p>
+    <section class="relative bg-slate-900 text-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#f59e0b_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full text-xs font-semibold tracking-wide uppercase mb-4">
+                Official Directory Hub
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
+                Discover <span class="text-amber-500">Myanmar</span> with Confidence
+            </h1>
+            <p class="text-slate-400 text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                Your comprehensive guide to regions, telecommunications, transport services, visa protocols, and premier lifestyle destinations across the country.
+            </p>
         </div>
     </section>
 
     <!-- Regions & States Section -->
-    <section id="regions" class="max-w-7xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-2 text-slate-900 border-l-4 border-amber-500 pl-3">တိုင်းနှင့် ပြည်နယ်များ (Regions & States)</h2>
-        <p class="text-slate-600 mb-8 text-sm">ဒေသတစ်ခုစီ၏ ထင်ရှားသော လည်ပတ်စရာများကို အသေးစိတ်ကြည့်ရှုရန် Card ကို နှိပ်ပါ။</p>
+    <section id="regions" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Regions & States</h2>
+                <p class="text-slate-500 text-sm mt-1">Select a destination card to view key attractions and operational insights.</p>
+            </div>
+        </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <!-- Yangon Region -->
-            <div onclick="openRegionModal('yangon')" class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition transform hover:-translate-y-1 border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80" alt="Shwedagon Pagoda Yangon" class="h-48 w-full object-cover">
-                <div class="p-5">
-                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Region</span>
-                    <h3 class="text-xl font-bold mt-2">ရန်ကုန်တိုင်းဒေသကြီး (Yangon)</h3>
-                    <p class="text-slate-600 text-sm mt-1">ရွှေတိဂုံစေတီတော်၊ ဆူးလေ၊ ဗိုလ်ချုပ်ဈေး နှင့် သမိုင်းဝင်အဆောက်အအုံများ</p>
-                    <div class="mt-4 text-amber-600 font-semibold text-sm flex items-center">
-                        လည်ပတ်စရာများကြည့်မည် <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            <div onclick="openRegionModal('yangon')" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden cursor-pointer group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80" alt="Shwedagon Pagoda" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-md">Commercial Hub</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-900">Yangon Region</h3>
+                        <p class="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">Home to the iconic Shwedagon Pagoda, colonial architecture, and vibrant urban commercial centers.</p>
+                    </div>
+                </div>
+                <div class="px-5 pb-5 pt-0">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-amber-600 font-semibold text-xs group-hover:text-amber-500">
+                        <span>View Attractions</span>
+                        <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Mandalay Region -->
-            <div onclick="openRegionModal('mandalay')" class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition transform hover:-translate-y-1 border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" alt="U Bein Bridge Mandalay" class="h-48 w-full object-cover">
-                <div class="p-5">
-                    <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">Region</span>
-                    <h3 class="text-xl font-bold mt-2">မန္တလေးတိုင်းဒေသကြီး (Mandalay)</h3>
-                    <p class="text-slate-600 text-sm mt-1">မန္တလေးနန်းတော်၊ ဦးပိန်တံတား၊ မဟာမြတ်မုနိ နှင့် ပြင်ဦးလွင်</p>
-                    <div class="mt-4 text-amber-600 font-semibold text-sm flex items-center">
-                        လည်ပတ်စရာများကြည့်မည် <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            <div onclick="openRegionModal('mandalay')" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden cursor-pointer group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" alt="Mandalay Palace" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-md">Cultural Heart</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-900">Mandalay Region</h3>
+                        <p class="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">The royal capital featuring U Bein Bridge, Mandalay Palace, and hill station connections.</p>
+                    </div>
+                </div>
+                <div class="px-5 pb-5 pt-0">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-amber-600 font-semibold text-xs group-hover:text-amber-500">
+                        <span>View Attractions</span>
+                        <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition"></i>
                     </div>
                 </div>
             </div>
 
             <!-- Shan State -->
-            <div onclick="openRegionModal('shan')" class="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition transform hover:-translate-y-1 border border-slate-100">
-                <img src="https://images.unsplash.com/photo-1508672019048-805479767513?auto=format&fit=crop&w=800&q=80" alt="Inle Lake Shan State" class="h-48 w-full object-cover">
-                <div class="p-5">
-                    <span class="text-xs font-bold text-teal-600 bg-teal-50 px-2 py-1 rounded">State</span>
-                    <h3 class="text-xl font-bold mt-2">ရှမ်းပြည်နယ် (Shan State)</h3>
-                    <p class="text-slate-600 text-sm mt-1">အင်းလေးကန်၊ ကလော၊ တောင်ကြီး၊ ပင်းတယ လိုဏ်ဂူ</p>
-                    <div class="mt-4 text-teal-600 font-semibold text-sm flex items-center">
-                        လည်ပတ်စရာများကြည့်မည် <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+            <div onclick="openRegionModal('shan')" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden cursor-pointer group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1508672019048-805479767513?auto=format&fit=crop&w=800&q=80" alt="Inle Lake" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-emerald-400 text-[11px] font-bold px-2.5 py-1 rounded-md">Highlands</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-900">Shan State</h3>
+                        <p class="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">Famous for Inle Lake leg-rowers, Kalaw trekking trails, and scenic highland mountain ranges.</p>
+                    </div>
+                </div>
+                <div class="px-5 pb-5 pt-0">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-amber-600 font-semibold text-xs group-hover:text-amber-500">
+                        <span>View Attractions</span>
+                        <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bagan Cultural Zone -->
+            <div onclick="openRegionModal('bagan')" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300 overflow-hidden cursor-pointer group flex flex-col justify-between">
+                <div>
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1600011689032-8b628b8a8747?auto=format&fit=crop&w=800&q=80" alt="Bagan Temples" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-md">UNESCO World Heritage</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-900">Bagan Heritage Zone</h3>
+                        <p class="text-slate-500 text-xs mt-2 line-clamp-2 leading-relaxed">Ancient archaeological landscape housing thousands of historical Buddhist temples and pagodas.</p>
+                    </div>
+                </div>
+                <div class="px-5 pb-5 pt-0">
+                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-amber-600 font-semibold text-xs group-hover:text-amber-500">
+                        <span>View Attractions</span>
+                        <i class="fa-solid fa-arrow-right text-xs transform group-hover:translate-x-1 transition"></i>
                     </div>
                 </div>
             </div>
@@ -90,221 +156,292 @@
         </div>
     </section>
 
-    <!-- Telecoms Section -->
-    <section id="telecom" class="bg-white py-12 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-2 text-slate-900 border-l-4 border-amber-500 pl-3">ဆက်သွယ်ရေး အော်ပရေတာများ (Telecom Operators)</h2>
-            <p class="text-slate-600 mb-8 text-sm">တရားဝင် လိုင်စင်ရ ဆက်သွယ်ရေး လုပ်ငန်းများ</p>
+    <!-- Telecom Operators Section -->
+    <section id="telecom" class="bg-white py-16 border-y border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Telecommunications</h2>
+                <p class="text-slate-500 text-sm mt-2">Licensed mobile network operators and USSD service codes.</p>
+            </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- MPT -->
-                <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center text-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/MPT_Logo.png/320px-MPT_Logo.png" alt="MPT Logo" class="h-16 object-contain mb-3" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=MPT+Logo'">
-                    <span class="font-bold text-slate-800">MPT</span>
-                    <span class="text-xs text-slate-500 mt-1">အစိုးရနှင့် ပုဂ္ဂလိက ဖက်စပ်</span>
+                <div class="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-lg transition duration-300">
+                    <div class="h-12 flex items-center justify-center mb-3">
+                        <span class="text-3xl font-black text-blue-800 tracking-tighter">MPT</span>
+                    </div>
+                    <span class="font-bold text-slate-900 text-sm">MPT Myanmar</span>
+                    <span class="text-xs text-slate-500 mt-1 bg-slate-200/70 px-2.5 py-0.5 rounded-md font-mono">Dial *106#</span>
                 </div>
+
                 <!-- ATOM -->
-                <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center text-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/ATOM_Myanmar_Logo.png/320px-ATOM_Myanmar_Logo.png" alt="ATOM Logo" class="h-16 object-contain mb-3" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=ATOM+Logo'">
-                    <span class="font-bold text-slate-800">ATOM Myanmar</span>
-                    <span class="text-xs text-slate-500 mt-1">4G/5G ကွန်ရက်</span>
+                <div class="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-lg transition duration-300">
+                    <div class="h-12 flex items-center justify-center mb-3">
+                        <span class="text-3xl font-black text-teal-500 tracking-tighter">ATOM</span>
+                    </div>
+                    <span class="font-bold text-slate-900 text-sm">ATOM Myanmar</span>
+                    <span class="text-xs text-slate-500 mt-1 bg-slate-200/70 px-2.5 py-0.5 rounded-md font-mono">Dial *979#</span>
                 </div>
+
                 <!-- Mytel -->
-                <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center text-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Mytel_logo.png/320px-Mytel_logo.png" alt="Mytel Logo" class="h-16 object-contain mb-3" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Mytel+Logo'">
-                    <span class="font-bold text-slate-800">Mytel</span>
-                    <span class="text-xs text-slate-500 mt-1">Telecom & Digital Services</span>
+                <div class="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-lg transition duration-300">
+                    <div class="h-12 flex items-center justify-center mb-3">
+                        <span class="text-3xl font-black text-orange-600 tracking-tighter">Mytel</span>
+                    </div>
+                    <span class="font-bold text-slate-900 text-sm">Mytel Telecom</span>
+                    <span class="text-xs text-slate-500 mt-1 bg-slate-200/70 px-2.5 py-0.5 rounded-md font-mono">Dial *966#</span>
                 </div>
-                <!-- Ooredoo/U通 -->
-                <div class="p-6 bg-slate-50 border border-slate-200 rounded-xl flex flex-col items-center text-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Ooredoo_Logo.svg/320px-Ooredoo_Logo.svg.png" alt="Ooredoo Logo" class="h-16 object-contain mb-3" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=Ooredoo+Logo'">
-                    <span class="font-bold text-slate-800">Ooredoo / U通</span>
-                    <span class="text-xs text-slate-500 mt-1">Mobile Data Service</span>
+
+                <!-- Ooredoo -->
+                <div class="p-6 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-lg transition duration-300">
+                    <div class="h-12 flex items-center justify-center mb-3">
+                        <span class="text-3xl font-black text-red-600 tracking-tighter">ooredoo</span>
+                    </div>
+                    <span class="font-bold text-slate-900 text-sm">Ooredoo Myanmar</span>
+                    <span class="text-xs text-slate-500 mt-1 bg-slate-200/70 px-2.5 py-0.5 rounded-md font-mono">Dial *124#</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Visa Guide Section (Dual: Foreigners & Local Citizens) -->
-    <section id="visa" class="max-w-7xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-2 text-slate-900 border-l-4 border-amber-500 pl-3">ဗီဇာနှင့် ပတ်စ်ပို့ လမ်းညွှန် (Visa & Passport Guide)</h2>
-        <p class="text-slate-600 mb-6 text-sm">ပြည်တွင်း / ပြည်ပ ခရီးသွားများအတွက် လိုအပ်သော လမ်းညွှန်ချက်များ</p>
+    <!-- Visa & Passport Guide Section -->
+    <section id="visa" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="max-w-xl mb-8">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Visa & Passport Guidelines</h2>
+            <p class="text-slate-500 text-sm mt-1">Travel documentation procedures for local citizens and international visitors.</p>
+        </div>
 
-        <!-- Tabs -->
-        <div class="flex border-b border-slate-200 mb-6">
-            <button onclick="switchVisaTab('local')" id="tab-local" class="py-3 px-6 font-semibold border-b-2 border-amber-500 text-amber-600">
-                <i class="fa-solid fa-passport mr-2"></i> မြန်မာနိုင်ငံသားများအတွက် (Local Citizens)
+        <!-- Custom Tabs Navigation -->
+        <div class="inline-flex p-1 bg-slate-200/60 rounded-xl mb-8">
+            <button onclick="switchVisaTab('local')" id="tab-local" class="py-2.5 px-5 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm">
+                <i class="fa-solid fa-passport mr-2 text-amber-500"></i>Local Citizens Guide
             </button>
-            <button onclick="switchVisaTab('foreign')" id="tab-foreign" class="py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800">
-                <i class="fa-solid fa-plane-arrival mr-2"></i> နိုင်ငံခြားသားများအတွက် (Foreign Visitors)
+            <button onclick="switchVisaTab('foreign')" id="tab-foreign" class="py-2.5 px-5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900">
+                <i class="fa-solid fa-plane-arrival mr-2 text-amber-500"></i>Foreign Travelers Guide
             </button>
         </div>
 
-        <!-- Local Content -->
-        <div id="visa-local-content" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-            <h3 class="text-lg font-bold text-slate-800 mb-4">မြန်မာနိုင်ငံသားများ ပြည်ပထွက်ခွာရန် လမ်းညွှန်</h3>
+        <!-- Local Citizen Content -->
+        <div id="visa-local-content" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+            <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                <i class="fa-solid fa-shield-halved text-amber-500 mr-2.5"></i> Outbound Travel & Passport Regulations
+            </h3>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-slate-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-amber-700 mb-2"><i class="fa-solid fa-book-bookmark mr-2"></i>1. မြန်မာနိုင်ငံကူးလက်မှတ် (Passport) လျှောက်ထားခြင်း</h4>
-                    <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
-                        <li>Online Booking System (passport.gov.mm) တွင် QR ကြိုတင်ရယူရန်။</li>
-                        <li>မှတ်ပုံတင်မူရင်း/မိတ္တူ၊ အိမ်ထောင်စုဇယား မူရင်း/မိတ္တူ လိုအပ်သည်။</li>
-                        <li>ရန်ကုန် သို့မဟုတ် သက်ဆိုင်ရာ ပြည်နယ်/တိုင်း ရဲတပ်ဖွဲ့မှူးရုံးများတွင် လျှောက်ထားနိုင်သည်။</li>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/60">
+                    <h4 class="font-bold text-slate-900 text-sm mb-3">1. Passport Issuance & Renewal</h4>
+                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 leading-relaxed">
+                        <li>Official QR Code booking token required prior to office submission.</li>
+                        <li>Original Citizenship Scrutiny Card (NRC) and Household List originals/copies required.</li>
+                        <li>Apply via regional passport issuance authorities across major state capitals.</li>
                     </ul>
                 </div>
-                <div class="bg-slate-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-amber-700 mb-2"><i class="fa-solid fa-globe mr-2"></i>2. ထိုင်း၊ စင်ကာပူ၊ ဂျပန် စသည့် နိုင်ငံများသို့ ဗီဇာလျှောက်ခြင်း</h4>
-                    <ul class="text-sm text-slate-700 space-y-2 list-disc pl-5">
-                        <li><strong>ထိုင်းနိုင်ငံ (Thailand):</strong> အာဆီယံ သဘောတူညီချက်အရ လေကြောင်းလိုင်းဖြင့် သွားပါက ၁၄ ရက် ဗီဇာမလိုပါ။</li>
-                        <li><strong>စင်ကာပူနိုင်ငံ (Singapore):</strong> အာဆီယံ နိုင်ငံသားများအတွက် ၃၀ ရက် ဗီဇာကင်းလွတ်ခွင့် ရှိသည်။</li>
-                        <li><strong>ဂျပန် / ကိုရီးယား:</strong> သက်ဆိုင်ရာ သံရုံးများ သို့မဟုတ် VFS Global မှတစ်ဆင့် e-Visa / Sticker Visa လျှောက်ထားရမည်။</li>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/60">
+                    <h4 class="font-bold text-slate-900 text-sm mb-3">2. International Visa Exemption & Entry</h4>
+                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 leading-relaxed">
+                        <li><strong>Thailand:</strong> 14-day visa exemption applies when entering via air travel.</li>
+                        <li><strong>Singapore & Vietnam:</strong> Visa-free entry allowed for ASEAN passport holders up to specified durations.</li>
+                        <li><strong>Japan & South Korea:</strong> Requires prior e-Visa or sticker visa authorization through official embassy portals.</li>
                     </ul>
                 </div>
             </div>
         </div>
 
-        <!-- Foreign Content -->
-        <div id="visa-foreign-content" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden">
-            <h3 class="text-lg font-bold text-slate-800 mb-4">Myanmar Entry Visa for Foreign Tourists</h3>
+        <!-- Foreign Visitors Content -->
+        <div id="visa-foreign-content" class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 shadow-sm hidden">
+            <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center">
+                <i class="fa-solid fa-globe text-amber-500 mr-2.5"></i> Entry Visa Protocols for Foreign Nationals
+            </h3>
             <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-slate-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-slate-800 mb-2">1. Tourist e-Visa</h4>
-                    <p class="text-sm text-slate-600">Apply via official government portal (evisa.moip.gov.mm). Processing time is usually 3 business days, valid for 28 days stay.</p>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/60">
+                    <h4 class="font-bold text-slate-900 text-sm mb-3">1. Tourist e-Visa</h4>
+                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 leading-relaxed">
+                        <li>Apply strictly via the government portal (evisa.moip.gov.mm).</li>
+                        <li>Standard processing timeline: 3 working days with a 28-day stay allowance.</li>
+                        <li>Passport must maintain a minimum validity of 6 months from arrival date.</li>
+                    </ul>
                 </div>
-                <div class="bg-slate-50 p-4 rounded-lg">
-                    <h4 class="font-bold text-slate-800 mb-2">2. Business Visa</h4>
-                    <p class="text-sm text-slate-600">Requires invitation letter from a registered company in Myanmar and company registration (DICA) certificate.</p>
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/60">
+                    <h4 class="font-bold text-slate-900 text-sm mb-3">2. Business e-Visa</h4>
+                    <ul class="text-xs text-slate-600 space-y-2.5 list-disc pl-4 leading-relaxed">
+                        <li>Requires an invitation letter from a company officially registered in Myanmar.</li>
+                        <li>Valid company registration certificate (DICA) copy must be submitted.</li>
+                        <li>Offers extended stay options subject to immigration approval.</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Transport Section -->
-    <section id="transport" class="bg-white py-12 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-2xl font-bold mb-2 text-slate-900 border-l-4 border-amber-500 pl-3">သယ်ယူပို့ဆောင်ရေး လုပ်ငန်းများ (Transport Services)</h2>
-            <p class="text-slate-600 mb-8 text-sm">လေကြောင်း၊ အဝေးပြေးကား နှင့် ရထားလမ်းကြောင်းများ</p>
+    <!-- Transport Services Section -->
+    <section id="transport" class="bg-white py-16 border-t border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Transport Networks</h2>
+                <p class="text-slate-500 text-sm mt-1">Domestic airlines, express coach fleets, and railway lines.</p>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Airlines -->
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <div class="h-40 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Airplane" class="w-full h-full object-cover">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Air Transport -->
+                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=600&q=80" alt="Domestic Airlines" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center">
+                                <i class="fa-solid fa-plane text-amber-500 mr-2 text-base"></i> Domestic Aviation
+                            </h3>
+                            <ul class="text-xs space-y-3 text-slate-600">
+                                <li class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                                    <span class="font-semibold text-slate-800">Myanmar National Airlines</span>
+                                    <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-medium">Flag Carrier</span>
+                                </li>
+                                <li class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                                    <span class="font-semibold text-slate-800">Myanmar Airways Intl (MAI)</span>
+                                    <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-medium">Domestic/Intl</span>
+                                </li>
+                                <li class="flex justify-between items-center">
+                                    <span class="font-semibold text-slate-800">Air Thanlwin</span>
+                                    <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-medium">Regional</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-plane text-amber-600 mr-2"></i>ပြည်တွင်း လေကြောင်းလိုင်းများ</h3>
-                    <ul class="text-sm space-y-2 text-slate-700">
-                        <li class="flex justify-between border-b pb-1"><span>Myanmar National Airlines (MNA)</span> <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">National</span></li>
-                        <li class="flex justify-between border-b pb-1"><span>Myanmar Airways International (MAI)</span> <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">Private</span></li>
-                        <li class="flex justify-between border-b pb-1"><span>Air Thanlwin</span> <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">Domestic</span></li>
-                    </ul>
                 </div>
 
-                <!-- Bus Express -->
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <div class="h-40 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Express Bus" class="w-full h-full object-cover">
+                <!-- Express Bus -->
+                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Express Bus" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 text-lg mb-3 flex items-center">
+                                <i class="fa-solid fa-bus text-amber-500 mr-2 text-base"></i> Highway Express Coaches
+                            </h3>
+                            <ul class="text-xs space-y-3 text-slate-600">
+                                <li class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                                    <span class="font-semibold text-slate-800">JJ Express</span>
+                                    <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-medium">2+1 VIP Class</span>
+                                </li>
+                                <li class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                                    <span class="font-semibold text-slate-800">Mandalar Minn Express</span>
+                                    <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-medium">Scania VIP</span>
+                                </li>
+                                <li class="flex justify-between items-center">
+                                    <span class="font-semibold text-slate-800">Famous Express</span>
+                                    <span class="text-[10px] bg-slate-200 px-2 py-0.5 rounded font-medium">Standard/VIP</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-bus text-amber-600 mr-2"></i>အဝေးပြေး ယာဉ်လိုင်းများ</h3>
-                    <ul class="text-sm space-y-2 text-slate-700">
-                        <li class="flex justify-between border-b pb-1"><span>JJ Express</span> <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">VIP / Normal</span></li>
-                        <li class="flex justify-between border-b pb-1"><span>Mandalar Minn Express</span> <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">Scania VIP</span></li>
-                        <li class="flex justify-between border-b pb-1"><span>Famous Express</span> <span class="text-xs bg-slate-200 px-2 py-0.5 rounded">Express</span></li>
-                    </ul>
                 </div>
 
-                <!-- Train -->
-                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <div class="h-40 rounded-lg overflow-hidden mb-4">
-                        <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="Train" class="w-full h-full object-cover">
+                <!-- Railway Network -->
+                <div class="bg-slate-50 rounded-2xl border border-slate-200/80 overflow-hidden flex flex-col justify-between">
+                    <div>
+                        <div class="h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=600&q=80" alt="Train Station" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 text-lg mb-2 flex items-center">
+                                <i class="fa-solid fa-train text-amber-500 mr-2 text-base"></i> Myanma Railways
+                            </h3>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4">
+                                Major routes connect Yangon-Mandalay, Yangon-Pyay, and Mawlamyine, alongside the local Yangon Circular Railway.
+                            </p>
+                            <span class="inline-block text-[11px] font-semibold bg-amber-100 text-amber-900 px-3 py-1 rounded-md">
+                                Ticketing available at main terminals
+                            </span>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg mb-2"><i class="fa-solid fa-train text-amber-600 mr-2"></i>မြန်မာ့မီးရထား (Myanma Railways)</h3>
-                    <p class="text-xs text-slate-600 mb-3">ရန်ကုန် - မန္တလေး၊ ရန်ကုန် - ပြည်၊ မော်လမြိုင် ခရီးစဉ်များနှင့် ရန်ကုန်မြို့ပတ်ရထား။</p>
-                    <span class="inline-block text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded">ဘူတာရုံကြီးများတွင် လက်မှတ်ဝယ်ယူနိုင်ပါသည်</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Shopping & Bars (with Google Maps integration) -->
-    <section id="lifestyle" class="max-w-7xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-2 text-slate-900 border-l-4 border-amber-500 pl-3">ဈေးဝယ်စင်တာများ နှင့် Bars/Nightlife (Google Maps လင့်ခ်များပါဝင်သည်)</h2>
-        <p class="text-slate-600 mb-8 text-sm">ရန်ကုန်နှင့် အဓိကမြို့ကြီးများရှိ နာမည်ကြီးနေရာများ</p>
+    <!-- Shopping & Nightlife Section (Google Maps Links) -->
+    <section id="lifestyle" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="mb-10">
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Shopping Malls & Nightlife</h2>
+            <p class="text-slate-500 text-sm mt-1">Direct Google Maps navigation links for commercial centers and popular venues.</p>
+        </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
+        <div class="grid lg:grid-cols-2 gap-8">
             <!-- Shopping Malls -->
             <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                    <i class="fa-solid fa-bag-shopping text-amber-600 mr-2"></i> Shopping Malls
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                    <i class="fa-solid fa-bag-shopping text-amber-500 mr-2"></i> Shopping Centers
                 </h3>
-                <div class="space-y-4">
+                <div class="space-y-3">
                     
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/80 flex items-center justify-between shadow-sm hover:border-amber-500/50 transition">
                         <div>
-                            <h4 class="font-bold text-slate-900">Junction City</h4>
-                            <p class="text-xs text-slate-500">ပန်းဘဲတန်းမြို့နယ်၊ ရန်ကုန်မြို့</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Junction City</h4>
+                            <p class="text-xs text-slate-500">Pabedan Township, Central Yangon</p>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Junction+City+Yangon" target="_blank" class="bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-amber-500 hover:text-white transition">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Maps တွင်ကြည့်မည်
+                        <a href="https://www.google.com/maps/search/?api=1&query=Junction+City+Yangon" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-location-dot mr-1.5 text-xs"></i> Open Maps
                         </a>
                     </div>
 
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/80 flex items-center justify-between shadow-sm hover:border-amber-500/50 transition">
                         <div>
-                            <h4 class="font-bold text-slate-900">Myanmar Plaza (မြန်မာပလာဇာ)</h4>
-                            <p class="text-xs text-slate-500">ဗဟန်းမြို့နယ်၊ ကမ္ဘာအေးဘုရားလမ်း</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Myanmar Plaza</h4>
+                            <p class="text-xs text-slate-500">Kaba Aye Pagoda Road, Bahan Township</p>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Myanmar+Plaza+Yangon" target="_blank" class="bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-amber-500 hover:text-white transition">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Maps တွင်ကြည့်မည်
+                        <a href="https://www.google.com/maps/search/?api=1&query=Myanmar+Plaza+Yangon" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-location-dot mr-1.5 text-xs"></i> Open Maps
                         </a>
                     </div>
 
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/80 flex items-center justify-between shadow-sm hover:border-amber-500/50 transition">
                         <div>
-                            <h4 class="font-bold text-slate-900">Time City Complex</h4>
-                            <p class="text-xs text-slate-500">ကမာရွတ်မြို့နယ်၊ ရန်ကုန်မြို့</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Time City Complex</h4>
+                            <p class="text-xs text-slate-500">Kamayut Township, Yangon</p>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Time+City+Yangon" target="_blank" class="bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-amber-500 hover:text-white transition">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Maps တွင်ကြည့်မည်
+                        <a href="https://www.google.com/maps/search/?api=1&query=Time+City+Yangon" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-location-dot mr-1.5 text-xs"></i> Open Maps
                         </a>
                     </div>
 
                 </div>
             </div>
 
-            <!-- Bars & Restaurants -->
+            <!-- Bars & Dining -->
             <div>
-                <h3 class="text-xl font-bold text-slate-800 mb-4 flex items-center">
-                    <i class="fa-solid fa-glass-cheers text-amber-600 mr-2"></i> Bars & Nightlife
+                <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
+                    <i class="fa-solid fa-martini-glass-citrus text-amber-500 mr-2"></i> Rooftop Bars & Dining
                 </h3>
-                <div class="space-y-4">
+                <div class="space-y-3">
                     
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/80 flex items-center justify-between shadow-sm hover:border-amber-500/50 transition">
                         <div>
-                            <h4 class="font-bold text-slate-900">Yangon Yangon Rooftop Bar</h4>
-                            <p class="text-xs text-slate-500">Sakura Tower top floor, Yangon</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Yangon Yangon Rooftop Bar</h4>
+                            <p class="text-xs text-slate-500">Sakura Tower Top Floor, Kyauktada</p>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Yangon+Yangon+Rooftop+Bar" target="_blank" class="bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-800 hover:text-white transition">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Maps တွင်ကြည့်မည်
+                        <a href="https://www.google.com/maps/search/?api=1&query=Yangon+Yangon+Rooftop+Bar" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-location-dot mr-1.5 text-xs"></i> Open Maps
                         </a>
                     </div>
 
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/80 flex items-center justify-between shadow-sm hover:border-amber-500/50 transition">
                         <div>
-                            <h4 class="font-bold text-slate-900">Babett Yangon</h4>
+                            <h4 class="font-bold text-slate-900 text-sm">Babett Yangon</h4>
                             <p class="text-xs text-slate-500">Hotel G, Yaw Min Gyi Street</p>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Babett+Yangon" target="_blank" class="bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-800 hover:text-white transition">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Maps တွင်ကြည့်မည်
+                        <a href="https://www.google.com/maps/search/?api=1&query=Babett+Yangon" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-location-dot mr-1.5 text-xs"></i> Open Maps
                         </a>
                     </div>
 
-                    <div class="bg-white p-4 rounded-xl border border-slate-200 flex justify-between items-center shadow-sm">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/80 flex items-center justify-between shadow-sm hover:border-amber-500/50 transition">
                         <div>
-                            <h4 class="font-bold text-slate-900">Port Autonomy</h4>
-                            <p class="text-xs text-slate-500">Kankaw Lane, Kamayut Township</p>
+                            <h4 class="font-bold text-slate-900 text-sm">Atlas Rooftop Bar</h4>
+                            <p class="text-xs text-slate-500">Sanchaung Township, Yangon</p>
                         </div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Port+Autonomy+Yangon" target="_blank" class="bg-slate-100 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-slate-800 hover:text-white transition">
-                            <i class="fa-solid fa-map-location-dot mr-1"></i> Maps တွင်ကြည့်မည်
+                        <a href="https://www.google.com/maps/search/?api=1&query=Atlas+Rooftop+Bar+Yangon" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-amber-500 hover:text-slate-950 px-3 py-1.5 rounded-lg text-xs font-semibold transition flex items-center">
+                            <i class="fa-solid fa-location-dot mr-1.5 text-xs"></i> Open Maps
                         </a>
                     </div>
 
@@ -313,80 +450,106 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-sm">© 2026 Myanmar Info Directory. All rights reserved.</p>
-            <p class="text-xs text-slate-500 mt-2">Designed and Developed by <span class="text-amber-400 font-semibold">NexusPulse Design</span></p>
+    <!-- Clean Minimalist Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <span class="text-white font-black text-sm tracking-tight">MYANMAR INFO</span>
+                <span class="text-slate-600">|</span>
+                <p class="text-xs text-slate-500">© 2026 Directory & Travel Guide. All rights reserved.</p>
+            </div>
+            <div class="flex space-x-6 text-xs text-slate-500">
+                <a href="#regions" class="hover:text-slate-300 transition">Regions</a>
+                <a href="#telecom" class="hover:text-slate-300 transition">Telecom</a>
+                <a href="#visa" class="hover:text-slate-300 transition">Visa</a>
+                <a href="#transport" class="hover:text-slate-300 transition">Transport</a>
+            </div>
         </div>
     </footer>
 
-    <!-- Region Detail Modal -->
-    <div id="regionModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 shadow-2xl relative">
-            <button onclick="closeRegionModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-800 text-xl font-bold">
+    <!-- Interactive Dynamic Region Modal -->
+    <div id="regionModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative border border-slate-100 animate-in fade-in zoom-in duration-200">
+            <!-- Close Button -->
+            <button onclick="closeRegionModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 transition rounded-full w-9 h-9 flex items-center justify-center text-sm font-bold">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div id="modalContent">
-                <!-- Content generated via Javascript -->
+                <!-- Modal content populated dynamically via JavaScript -->
             </div>
         </div>
     </div>
 
-    <!-- JavaScript logic -->
+    <!-- JavaScript Interactivity -->
     <script>
-        // Region Detail Data
+        // Region Detailed Data Object
         const regionDetails = {
             yangon: {
-                title: "ရန်ကုန်တိုင်းဒေသကြီး (Yangon Region)",
+                title: "Yangon Region",
                 image: "https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=800&q=80",
-                description: "မြန်မာနိုင်ငံ၏ စီးပွားရေးမြို့တော်ဖြစ်ပြီး သမိုင်းဝင် စေတီပုထိုးများ၊ ကိုလိုနီခေတ် အဆောက်အအုံများ ပေါများရာ မြို့ဖြစ်သည်။",
+                description: "The primary commercial gateway of Myanmar, renowned for sacred pagoda complexes, colonial architecture, and modern lifestyle attractions.",
                 places: [
-                    { name: "ရွှေတိဂုံစေတီတော် (Shwedagon Pagoda)", desc: "မြန်မာနိုင်ငံ၏ အဓိက အထွဋ်အမြတ်ထားရာ ကမ္ဘာကျော် စေတီတော်ကြီး။" },
-                    { name: "ဆူးလေစေတီတော် (Sule Pagoda)", desc: "ရန်ကုန်မြို့လယ်ကောင်တွင် တည်ရှိသော သမိုင်းဝင်စေတီ။" },
-                    { name: "ဗိုလ်ချုပ်အောင်ဆန်းဈေး (Bogyoke Market)", desc: "လက်မှုပစ္စည်းများ၊ ကျောက်သံပတ္တမြားနှင့် အမှတ်တရပစ္စည်းများ ဝယ်ယူရန် နာမည်ကြီးဈေး။" },
-                    { name: "ကန်တော်ကြီးနှင့် မြို့မဥယျာဉ်", desc: "သဘာဝပတ်ဝန်းကျင်နှင့် ကာရဝိတ်နန်းတော်ကို ကြည့်ရှုနိုင်သည့် အပန်းဖြေစခန်း။" },
-                    { name: "ရန်ကုန်မြို့ပတ်ရထား (Yangon Circular Railway)", desc: "မြို့ခံများ၏ လူနေမှုဘဝကို လေ့လာနိုင်သည့် ခရီးစဉ်။" }
+                    { name: "Shwedagon Pagoda", desc: "The most sacred Buddhist pagoda in Myanmar, dominating the city skyline." },
+                    { name: "Sule Pagoda & Historic Downtown", desc: "Central landmark surrounded by heritage architecture and public parks." },
+                    { name: "Bogyoke Aung San Market", desc: "Historic shopping bazaar known for gemstones, handicrafts, and local art." },
+                    { name: "Kandawgyi Lake & Park", desc: "Scenic nature park featuring views of Karaweik Palace and peaceful walking boardwalks." }
                 ]
             },
             mandalay: {
-                title: "မန္တလေးတိုင်းဒေသကြီး (Mandalay Region)",
+                title: "Mandalay Region",
                 image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80",
-                description: "မြန်မာ့နောက်ဆုံးမင်းဆက်များ စိုက်ထူခဲ့ရာ ယဉ်ကျေးမှု မြို့တော်။",
+                description: "Cultural capital of Upper Myanmar, retaining deep historical heritage and serving as a gateway to Northern hill stations.",
                 places: [
-                    { name: "မန္တလေးနန်းတော် (Mandalay Palace)", desc: "ကုန်းဘောင်မင်းဆက်၏ နောက်ဆုံးနန်းတော်။" },
-                    { name: "ဦးပိန်တံတား (U Bein Bridge)", desc: "ကမ္ဘာ့အရှည်ဆုံး ကျွန်းသစ်တံတား။" },
-                    { name: "မဟာမြတ်မုနိ ဘုရားကြီး", desc: "မန္တလေးမြို့၏ တန်ခိုးကြီး ဘုရား။" }
+                    { name: "Mandalay Royal Palace", desc: "The last royal palace structure of the Konbaung Dynasty." },
+                    { name: "U Bein Bridge", desc: "The world's oldest and longest teakwood bridge crossing Taungthaman Lake." },
+                    { name: "Mahamuni Buddha Temple", desc: "Major pilgrimage site housing a highly revered ancient Buddha image." },
+                    { name: "Pyin Oo Lwin", desc: "Nearby alpine hill station famous for botanical gardens and cool climate." }
                 ]
             },
             shan: {
-                title: "ရှမ်းပြည်နယ် (Shan State)",
+                title: "Shan State",
                 image: "https://images.unsplash.com/photo-1508672019048-805479767513?auto=format&fit=crop&w=800&q=80",
-                description: "ရာသီဥတု အေးမြပြီး သဘာဝရှုခင်းများ လှပသော တောင်ပေါ်ဒေသ။",
+                description: "An expansive highland region characterized by unique indigenous cultures, cool mountain climate, and natural lakes.",
                 places: [
-                    { name: "အင်းလေးကန် (Inle Lake)", desc: "ခြေတစ်ဖက်တည်းလှေလှော်သည့် အင်းသားတို့၏ ရိုးရာနှင့် ရေပေါ်စိုက်ခင်းများ။" },
-                    { name: "ကလောမြို့ (Kalaw)", desc: "တောင်တက်ခရီး (Trekking) သွားရောက်ရန် နာမည်ကြီး အပန်းဖြေမြို့။" }
+                    { name: "Inle Lake", desc: "Famous for leg-rowing fishermen, floating gardens, and stilt-house villages." },
+                    { name: "Kalaw Hill Town", desc: "Popular trekking destination offering scenic routes across Shan hills." },
+                    { name: "Pindaya Caves", desc: "Limestone cave complex containing thousands of consecrated Buddha statues." }
+                ]
+            },
+            bagan: {
+                title: "Bagan Cultural Heritage Zone",
+                image: "https://images.unsplash.com/photo-1600011689032-8b628b8a8747?auto=format&fit=crop&w=800&q=80",
+                description: "UNESCO World Heritage site featuring over 2,000 preserved ancient temples and pagodas dating from the 11th to 13th centuries.",
+                places: [
+                    { name: "Ananda Temple", desc: "Architectural masterpiece of early Bagan temple craftsmanship." },
+                    { name: "Thatbyinnyu Temple", desc: "The tallest historical monument standing within the Bagan archaeological zone." },
+                    { name: "Hot Air Balloon Experiences", desc: "Panoramic aerial tours over the ancient temple plains during sunrise." }
                 ]
             }
         };
 
+        // Open Region Detail Modal
         function openRegionModal(key) {
             const data = regionDetails[key];
             if(!data) return;
 
             let placesList = data.places.map(p => `
-                <li class="bg-slate-50 p-3 rounded-lg border border-slate-100">
-                    <span class="font-bold text-slate-800 text-sm">${p.name}</span>
-                    <p class="text-xs text-slate-600 mt-0.5">${p.desc}</p>
+                <li class="bg-slate-50 p-4 rounded-xl border border-slate-200/60">
+                    <span class="font-bold text-slate-900 text-xs block flex items-center">
+                        <i class="fa-solid fa-location-dot text-amber-500 mr-2"></i>${p.name}
+                    </span>
+                    <p class="text-xs text-slate-500 mt-1 pl-5 leading-relaxed">${p.desc}</p>
                 </li>
             `).join('');
 
             document.getElementById('modalContent').innerHTML = `
-                <img src="${data.image}" class="w-full h-48 object-cover rounded-xl mb-4" alt="${data.title}">
+                <div class="h-48 rounded-xl overflow-hidden mb-5">
+                    <img src="${data.image}" class="w-full h-full object-cover" alt="${data.title}">
+                </div>
                 <h3 class="text-xl font-bold text-slate-900 mb-2">${data.title}</h3>
-                <p class="text-sm text-slate-600 mb-4">${data.description}</p>
-                <h4 class="font-bold text-slate-800 text-sm mb-3">ထင်ရှားသော လည်ပတ်စရာနေရာများ -</h4>
-                <ul class="space-y-2">
+                <p class="text-xs text-slate-600 leading-relaxed mb-5">${data.description}</p>
+                <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-3">Key Destinations & Highlights</h4>
+                <ul class="space-y-2.5">
                     ${placesList}
                 </ul>
             `;
@@ -394,10 +557,12 @@
             document.getElementById('regionModal').classList.remove('hidden');
         }
 
+        // Close Region Detail Modal
         function closeRegionModal() {
             document.getElementById('regionModal').classList.add('hidden');
         }
 
+        // Switch Visa Tabs (Local vs Foreign)
         function switchVisaTab(type) {
             const localContent = document.getElementById('visa-local-content');
             const foreignContent = document.getElementById('visa-foreign-content');
@@ -407,13 +572,13 @@
             if(type === 'local') {
                 localContent.classList.remove('hidden');
                 foreignContent.classList.add('hidden');
-                tabLocal.className = "py-3 px-6 font-semibold border-b-2 border-amber-500 text-amber-600";
-                tabForeign.className = "py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800";
+                tabLocal.className = "py-2.5 px-5 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm";
+                tabForeign.className = "py-2.5 px-5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900";
             } else {
                 localContent.classList.add('hidden');
                 foreignContent.classList.remove('hidden');
-                tabForeign.className = "py-3 px-6 font-semibold border-b-2 border-amber-500 text-amber-600";
-                tabLocal.className = "py-3 px-6 font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800";
+                tabForeign.className = "py-2.5 px-5 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-sm";
+                tabLocal.className = "py-2.5 px-5 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900";
             }
         }
     </script>
