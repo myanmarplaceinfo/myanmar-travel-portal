@@ -324,3 +324,422 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover Myanmar - Modern Travel Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar -->
+    <nav class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('explore')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-slate-950 font-extrabold text-xl shadow-lg shadow-amber-500/20">
+                    M
+                </div>
+                <div>
+                    <span class="text-2xl font-black text-amber-400 block leading-none tracking-wide">Discover Myanmar</span>
+                    <span class="text-xs text-slate-400 font-medium">TRAVEL & VISA PORTAL</span>
+                </div>
+            </div>
+            
+            <!-- Desktop Navigation Tabs -->
+            <div class="hidden lg:flex space-x-2 items-center bg-slate-950/80 p-1.5 rounded-2xl border border-slate-800 text-sm font-semibold">
+                <button onclick="switchTab('explore')" id="btn-explore" class="tab-btn px-4 py-2 rounded-xl text-amber-400 bg-slate-800 transition"><i class="fa-solid fa-compass mr-1.5"></i> Explore</button>
+                <button onclick="switchTab('visa')" id="btn-visa" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-passport mr-1.5"></i> Visa Hub</button>
+                <button onclick="switchTab('transport')" id="btn-transport" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-plane-departure mr-1.5"></i> Transport</button>
+                <button onclick="switchTab('hotels')" id="btn-hotels" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-hotel mr-1.5"></i> Hotels</button>
+                <button onclick="switchTab('simcards')" id="btn-simcards" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-sim-card mr-1.5"></i> SIM Cards</button>
+                <button onclick="switchTab('lifestyle')" id="btn-lifestyle" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-amber-400 transition"><i class="fa-solid fa-martini-glass-citrus mr-1.5"></i> Shopping & Bars</button>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="menu-btn" class="lg:hidden text-amber-400 text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-800 bg-slate-950 px-4 py-4 space-y-2 text-sm">
+            <button onclick="switchTab('explore'); toggleMobileMenu()" class="block w-full text-left py-2 text-amber-400 font-bold">Explore (14 States & Regions)</button>
+            <button onclick="switchTab('visa'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Visa Hub</button>
+            <button onclick="switchTab('transport'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Transport</button>
+            <button onclick="switchTab('hotels'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Hotels & Stays</button>
+            <button onclick="switchTab('simcards'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">SIM Cards</button>
+            <button onclick="switchTab('lifestyle'); toggleMobileMenu()" class="block w-full text-left py-2 text-slate-300">Shopping & Nightlife</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Header -->
+    <header class="max-w-7xl mx-auto px-4 pt-12 pb-6 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-3 text-amber-400 tracking-tight">
+            Explore the Magic of Golden Myanmar
+        </h1>
+        <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-6">
+            Your premium gateway for travel destinations, e-visas, luxury stays, transport, and local experiences.
+        </p>
+
+        <!-- Global Search Bar -->
+        <div class="max-w-xl mx-auto flex gap-2 bg-slate-900 p-2 rounded-2xl border border-slate-800 shadow-xl">
+            <i class="fa-solid fa-magnifying-glass text-slate-500 my-auto ml-3"></i>
+            <input type="text" id="search-input" onkeyup="filterCards()" placeholder="Search Bagan, Inle, Flight, Visa, Hotels..." class="w-full bg-transparent px-2 py-1 text-slate-100 focus:outline-none text-sm">
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6 w-full">
+
+        <!-- PAGE 1: EXPLORE (14 States & Regions with Images) -->
+        <section id="tab-explore" class="tab-content active">
+            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-earth-asia"></i> 14 States & Regions of Myanmar
+            </h2>
+            <div id="card-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Yangon -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Yangon" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Yangon Region</h3>
+                        <p class="text-slate-400 text-sm mt-1">Shwedagon Pagoda, Colonial Heritage Buildings, Kandawgyi Park & Local Night Markets.</p>
+                    </div>
+                </div>
+
+                <!-- Mandalay -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=600&q=80" alt="Mandalay & Bagan" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Mandalay Region (Bagan)</h3>
+                        <p class="text-slate-400 text-sm mt-1">UNESCO World Heritage Bagan pagodas, U Bein Bridge, and Mandalay Palace.</p>
+                    </div>
+                </div>
+
+                <!-- Shan -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=600&q=80" alt="Shan State" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Shan State (Inle Lake)</h3>
+                        <p class="text-slate-400 text-sm mt-1">Leg-rowing fishermen, floating gardens, Kalaw pine forests, and cool mountain weather.</p>
+                    </div>
+                </div>
+
+                <!-- Rakhine -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Rakhine Beach" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Rakhine State (Ngapali)</h3>
+                        <p class="text-slate-400 text-sm mt-1">Pristine white-sand beaches at Ngapali and ancient Mrauk-U archaeological kingdom.</p>
+                    </div>
+                </div>
+
+                <!-- Kachin -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Kachin Mountains" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Kachin State</h3>
+                        <p class="text-slate-400 text-sm mt-1">Hkakabo Razi snow peaks, Indawgyi Lake, and rich northern nature landscapes.</p>
+                    </div>
+                </div>
+
+                <!-- Kayin -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Hpa-An Kayin" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Kayin State (Hpa-An)</h3>
+                        <p class="text-slate-400 text-sm mt-1">Limestone mountains, natural caves, Saddar Cave, and Mount Zwekabin views.</p>
+                    </div>
+                </div>
+
+                <!-- Tanintharyi -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Tanintharyi Islands" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Tanintharyi Region</h3>
+                        <p class="text-slate-400 text-sm mt-1">Mergui Archipelago with over 800 tropical islands, diving, and Dawei coast.</p>
+                    </div>
+                </div>
+
+                <!-- Ayeyarwady -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Ayeyarwady Beaches" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Region</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Ayeyarwady Region</h3>
+                        <p class="text-slate-400 text-sm mt-1">Chaung Tha & Ngwe Saung beach resorts and Pathein river delta culture.</p>
+                    </div>
+                </div>
+
+                <!-- Mon -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1508672019048-805479767793?auto=format&fit=crop&w=600&q=80" alt="Mon State" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Mon State</h3>
+                        <p class="text-slate-400 text-sm mt-1">Kyaiktiyo Golden Rock Pagoda, Mawlamyine coastal city, and Win Sein Reclining Buddha.</p>
+                    </div>
+                </div>
+
+                <!-- Chin -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Chin State" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Chin State</h3>
+                        <p class="text-slate-400 text-sm mt-1">Mount Victoria (Nat Ma Taung), heart-shaped Rih Lake, and mountain culture.</p>
+                    </div>
+                </div>
+
+                <!-- Kayah -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80" alt="Kayah State" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">State</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Kayah State</h3>
+                        <p class="text-slate-400 text-sm mt-1">Loikaw Taung Kwe Pagoda on craggy limestone and scenic mountain landscapes.</p>
+                    </div>
+                </div>
+
+                <!-- Sagaing, Magway, Bago Combined Card -->
+                <div class="searchable-card bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/50 transition duration-300 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=600&q=80" alt="Central Myanmar" class="w-full h-48 object-cover">
+                    <div class="p-5">
+                        <span class="text-xs font-bold px-2.5 py-1 bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20">Regions</span>
+                        <h3 class="text-xl font-bold text-white mt-2">Sagaing, Magway & Bago</h3>
+                        <p class="text-slate-400 text-sm mt-1">Mingun Bell, Monywa Standing Buddha, Minbu mud volcanoes, and ancient Bago palace.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PAGE 2: VISA HUB -->
+        <section id="tab-visa" class="tab-content">
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-4xl mx-auto shadow-xl">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-14 h-14 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-2xl flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-passport"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Official Myanmar e-Visa Portal</h2>
+                        <p class="text-slate-400 text-sm">Ministry of Immigration and Population Official Guidelines</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">Tourist e-Visa</span>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Stay Duration:</b> Up to 28 days</li>
+                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Validity:</b> 90 days from approval</li>
+                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Processing Time:</b> 3 Working Days</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800">
+                        <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">Business e-Visa</span>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Stay Duration:</b> Up to 70 days</li>
+                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Requirement:</b> Company Invitation Letter</li>
+                            <li><i class="fa-solid fa-check text-amber-500 mr-2"></i> <b>Entry Type:</b> Single Entry</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <a href="https://evisa.moip.gov.mm" target="_blank" class="block w-full text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold py-4 rounded-xl shadow-lg transition">
+                    Apply Official e-Visa Directly <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- PAGE 3: TRANSPORT -->
+        <section id="tab-transport" class="tab-content">
+            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-plane-departure"></i> Transportation & Booking
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Flight Tickets -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-plane text-amber-400"></i> Domestic & International Flights</h3>
+                    <div class="space-y-3">
+                        <a href="https://flymya.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
+                            <span class="font-semibold text-slate-200">Flymya Flight Booking Portal</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        </a>
+                        <a href="https://www.flymna.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
+                            <span class="font-semibold text-slate-200">Myanmar National Airlines (MNA)</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        </a>
+                        <a href="https://www.maiair.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
+                            <span class="font-semibold text-slate-200">Air KBZ / MAI Official Site</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Express Buses -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-bus text-amber-400"></i> Highway Express Bus</h3>
+                    <div class="space-y-3">
+                        <a href="https://mmbusticket.com" target="_blank" class="flex justify-between items-center bg-slate-950 p-4 rounded-xl border border-slate-800 hover:border-amber-500 transition">
+                            <span class="font-semibold text-slate-200">MMBusTicket Express Booking</span>
+                            <i class="fa-solid fa-chevron-right text-xs text-amber-400"></i>
+                        </a>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                            <span class="text-xs font-bold text-amber-400 block mb-1">Bus Terminals</span>
+                            <p class="text-xs text-slate-300"><b>Yangon:</b> Aung Mingalar & Kyee Myindaing Terminal<br><b>Mandalay:</b> Chan Mya Thazi Highway Terminal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: HOTELS -->
+        <section id="tab-hotels" class="tab-content">
+            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-hotel"></i> Hotels & Accommodation Booking
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="https://www.agoda.com" target="_blank" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500 transition shadow-lg">
+                    <i class="fa-solid fa-bed text-4xl text-amber-400 mb-3 block"></i>
+                    <h3 class="font-bold text-lg text-white">Agoda</h3>
+                    <p class="text-xs text-slate-400 mt-2">Best hotel rates in Yangon, Bagan, Mandalay, and Inle Lake.</p>
+                </a>
+                <a href="https://www.booking.com" target="_blank" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500 transition shadow-lg">
+                    <i class="fa-solid fa-building text-4xl text-amber-400 mb-3 block"></i>
+                    <h3 class="font-bold text-lg text-white">Booking.com</h3>
+                    <p class="text-xs text-slate-400 mt-2">Global booking platform with hotels and resorts across Myanmar.</p>
+                </a>
+                <a href="https://www.traveloka.com" target="_blank" class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center hover:border-amber-500 transition shadow-lg">
+                    <i class="fa-solid fa-suitcase text-4xl text-amber-400 mb-3 block"></i>
+                    <h3 class="font-bold text-lg text-white">Traveloka Stays</h3>
+                    <p class="text-xs text-slate-400 mt-2">Southeast Asia’s top hotel and resort reservation service.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- PAGE 5: SIM CARDS -->
+        <section id="tab-simcards" class="tab-content">
+            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-sim-card"></i> Tourist SIM Cards & Mobile Internet
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fa-solid fa-signal text-amber-400 text-3xl mb-3 block"></i>
+                    <h3 class="font-bold text-white text-lg">MPT</h3>
+                    <span class="text-xs text-slate-400 block mt-1">National Network</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fa-solid fa-wifi text-amber-400 text-3xl mb-3 block"></i>
+                    <h3 class="font-bold text-white text-lg">ATOM</h3>
+                    <span class="text-xs text-slate-400 block mt-1">High-Speed 4G</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fa-solid fa-tower-cell text-amber-400 text-3xl mb-3 block"></i>
+                    <h3 class="font-bold text-white text-lg">Mytel</h3>
+                    <span class="text-xs text-slate-400 block mt-1">Data Packages</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center shadow-lg">
+                    <i class="fa-solid fa-globe text-amber-400 text-3xl mb-3 block"></i>
+                    <h3 class="font-bold text-white text-lg">Ucell / Ooredoo</h3>
+                    <span class="text-xs text-slate-400 block mt-1">City Coverage</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: SHOPPING & BARS -->
+        <section id="tab-lifestyle" class="tab-content">
+            <h2 class="text-2xl font-bold text-amber-400 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-martini-glass-citrus"></i> Shopping Malls & Nightlife Bars
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+                    <h3 class="font-bold text-xl text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-bag-shopping text-amber-400"></i> Top Shopping Places</h3>
+                    <ul class="text-sm space-y-3 text-slate-300">
+                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Bogyoke Aung San Market:</b> Myanmar Gems, Jade, Handicrafts, and Souvenirs.</li>
+                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Junction City & Myanmar Plaza:</b> Premium Malls with international brands.</li>
+                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Zay Cho Market Mandalay:</b> Traditional textiles and regional food items.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-lg">
+                    <h3 class="font-bold text-xl text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-beer-mug-empty text-amber-400"></i> Nightlife & Bars</h3>
+                    <ul class="text-sm space-y-3 text-slate-300">
+                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Yangon 19th Street Chinatown:</b> Vibrant Street BBQ and draught beer spot.</li>
+                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Rooftop Lounges:</b> Atlas Rooftop Bar & Vista Bar with Shwedagon views.</li>
+                        <li class="bg-slate-950 p-3 rounded-xl border border-slate-800"><b>Bagan Sunset Lounges:</b> Riverside dining along the Ayeyarwady river.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 text-center py-6 text-slate-500 text-xs bg-slate-950 mt-12">
+        <p>&copy; 2026 Discover Myanmar Travel Portal. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Functions for Tab Switching and Search -->
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-slate-800', 'text-amber-400');
+                btn.classList.add('text-slate-400');
+            });
+
+            // Activate selected tab content
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Activate selected button
+            const activeBtn = document.getElementById('btn-' + tabName);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-slate-800', 'text-amber-400');
+                activeBtn.classList.remove('text-slate-400');
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        document.getElementById('menu-btn').addEventListener('click', toggleMobileMenu);
+
+        function filterCards() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.searchable-card');
+            
+            // Switch to explore tab if user searches
+            if (query.trim() !== '') {
+                switchTab('explore');
+            }
+
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
